@@ -859,6 +859,125 @@
         caret-color: var(--primary); /* Cursor Real com cor da marca */
       }
 
+      /* --- MODAL (Carreiras) --- */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-container {
+        background: var(--surface-1);
+        width: 90%;
+        max-width: 500px;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border);
+        transform: scale(0.9) translateY(20px);
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        overflow: hidden;
+      }
+
+      .modal-backdrop.open .modal-container {
+        transform: scale(1) translateY(0);
+      }
+
+      .modal-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--surface-2);
+      }
+
+      .modal-body {
+        padding: 2rem;
+      }
+
+      .file-input-wrapper {
+        position: relative;
+        margin-bottom: 1.5rem;
+        border: 2px dashed var(--border);
+        border-radius: var(--radius-sm);
+        padding: 2rem;
+        text-align: center;
+        transition: border-color 0.2s;
+        cursor: pointer;
+      }
+
+      .file-input-wrapper:hover {
+        border-color: var(--primary);
+      }
+
+      /* --- FAQ ACCORDION (NOVO) --- */
+      details {
+        background: var(--surface-2);
+        border-radius: var(--radius-sm);
+        margin-bottom: 0.8rem;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+      }
+
+      summary {
+        padding: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        list-style: none; /* Remove triângulo padrão */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--text-main);
+      }
+
+      summary:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      summary::after {
+        content: "+";
+        font-size: 1.2rem;
+        font-weight: 400;
+        transition: transform 0.3s ease;
+        color: var(--primary);
+      }
+
+      details[open] summary::after {
+        transform: rotate(45deg);
+      }
+
+      details[open] {
+        border-color: var(--primary);
+      }
+
+      .faq-answer {
+        padding: 0 1rem 1rem 1rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        margin-top: 0.5rem;
+        padding-top: 1rem;
+      }
+
       .footer-links ul {
         list-style: none;
         padding: 0;
@@ -1283,33 +1402,42 @@
             <h4 style="color: white; margin-bottom: 1rem">Institucional</h4>
             <ul>
               <li><a href="#sobre">Sobre Nós</a></li>
-              <li><a href="#">Carreiras</a></li>
-              <li><a href="#">Política de Privacidade</a></li>
+              <li><a href="#" id="link-careers">Carreiras</a></li>
+              <!-- ATIVAÇÃO: Adicionado ID para controle JS -->
+              <li><a href="#" id="link-privacy">Política de Privacidade</a></li>
             </ul>
           </div>
           <div class="footer-links">
             <h4 style="color: white; margin-bottom: 1rem">Ajuda</h4>
             <ul>
-              <li><a href="#">Fale Conosco</a></li>
-              <li><a href="#">Entregas</a></li>
-              <li><a href="#">FAQ</a></li>
+              <li><a href="#" id="link-contact">Fale Conosco</a></li>
+              <li><a href="#" id="link-delivery">Entregas</a></li>
+              <!-- ATIVAÇÃO: Adicionado ID para controle JS -->
+              <li><a href="#" id="link-faq">FAQ</a></li>
             </ul>
           </div>
           <div>
             <h4 style="color: white; margin-bottom: 1rem">Siga-nos</h4>
             <div style="display: flex; gap: 1rem">
+              <!-- Links Sociais Atualizados -->
               <a
-                href="#"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="icon-btn"
                 style="border-color: #444; color: white"
-                ><i class="fab fa-instagram"></i
-              ></a>
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
               <a
-                href="#"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="icon-btn"
                 style="border-color: #444; color: white"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -1323,7 +1451,8 @@
             font-size: 0.85rem;
           "
         >
-          &copy; 2025 Pizzaria Delícia. Todos os direitos reservados.
+          &copy; 2025 Pizzaria Delícia. Todos os direitos reservados.<br />
+          Desenvolvido por <strong>Jefferson de Araújo Silva</strong>
         </div>
       </div>
     </footer>
@@ -1434,6 +1563,511 @@
         </form>
       </div>
     </aside>
+
+    <!-- Careers Modal -->
+    <div class="modal-backdrop" id="careers-modal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Trabalhe Conosco</h3>
+          <button class="icon-btn close-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem">
+            Junte-se à equipe da Pizzaria Delícia. Preencha o formulário e anexe
+            seu currículo.
+          </p>
+          <form id="careers-form">
+            <div class="floating-group">
+              <input
+                type="text"
+                id="career-name"
+                class="floating-input"
+                placeholder=" "
+                required
+              />
+              <label for="career-name" class="floating-label"
+                >Nome Completo</label
+              >
+            </div>
+            <div class="floating-group">
+              <input
+                type="email"
+                id="career-email"
+                class="floating-input"
+                placeholder=" "
+                required
+              />
+              <label for="career-email" class="floating-label">E-mail</label>
+            </div>
+            <div class="floating-group">
+              <input
+                type="tel"
+                id="career-phone"
+                class="floating-input"
+                placeholder=" "
+                required
+              />
+              <label for="career-phone" class="floating-label">Telefone</label>
+            </div>
+
+            <div
+              class="file-input-wrapper"
+              onclick="document.getElementById('career-cv').click()"
+            >
+              <i
+                class="fas fa-cloud-upload-alt"
+                style="
+                  font-size: 2rem;
+                  color: var(--primary);
+                  margin-bottom: 0.5rem;
+                "
+              ></i>
+              <p style="color: var(--text-muted); font-size: 0.9rem">
+                Clique para enviar seu CV (PDF/DOC)
+              </p>
+              <input
+                type="file"
+                id="career-cv"
+                accept=".pdf,.doc,.docx"
+                required
+                style="display: none"
+                onchange="this.previousElementSibling.innerText = this.files[0].name"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              Enviar Candidatura
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy Policy Modal (NOVO) -->
+    <div class="modal-backdrop" id="privacy-modal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Política de Privacidade</h3>
+          <button class="icon-btn close-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body" style="max-height: 60vh; overflow-y: auto">
+          <p
+            style="
+              color: var(--text-muted);
+              margin-bottom: 1.5rem;
+              font-size: 0.9rem;
+            "
+          >
+            Última atualização: 10 de Dezembro de 2025.
+          </p>
+
+          <h4 style="color: var(--text-main); margin-bottom: 0.5rem">
+            1. Coleta de Dados
+          </h4>
+          <p
+            style="
+              color: var(--text-muted);
+              margin-bottom: 1.5rem;
+              font-size: 0.95rem;
+              line-height: 1.6;
+            "
+          >
+            Coletamos apenas as informações estritamente necessárias para o
+            processamento do seu pedido (nome, endereço e telefone) e para fins
+            de recrutamento quando voluntariamente submetidos.
+          </p>
+
+          <h4 style="color: var(--text-main); margin-bottom: 0.5rem">
+            2. Proteção de Dados
+          </h4>
+          <p
+            style="
+              color: var(--text-muted);
+              margin-bottom: 1.5rem;
+              font-size: 0.95rem;
+              line-height: 1.6;
+            "
+          >
+            Seus dados são armazenados em servidores seguros e nunca são
+            vendidos ou compartilhados com terceiros para fins de marketing.
+            Utilizamos criptografia padrão da indústria.
+          </p>
+
+          <h4 style="color: var(--text-main); margin-bottom: 0.5rem">
+            3. Cookies
+          </h4>
+          <p
+            style="
+              color: var(--text-muted);
+              margin-bottom: 2rem;
+              font-size: 0.95rem;
+              line-height: 1.6;
+            "
+          >
+            Utilizamos cookies apenas para manter a funcionalidade do carrinho
+            de compras e preferências de tema (modo escuro/claro).
+          </p>
+
+          <button
+            class="btn btn-primary"
+            style="width: 100%"
+            onclick="document.getElementById('privacy-modal').classList.remove('open')"
+          >
+            Entendi e Concordo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Modal (NOVO) -->
+    <div class="modal-backdrop" id="contact-modal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Fale Conosco</h3>
+          <button class="icon-btn close-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem">
+            Dúvidas, sugestões ou elogios? Envie-nos uma mensagem diretamente.
+          </p>
+          <form id="contact-form">
+            <div class="floating-group">
+              <input
+                type="text"
+                id="contact-name"
+                class="floating-input"
+                placeholder=" "
+                required
+              />
+              <label for="contact-name" class="floating-label"
+                >Nome Completo</label
+              >
+            </div>
+            <div class="floating-group">
+              <input
+                type="email"
+                id="contact-email"
+                class="floating-input"
+                placeholder=" "
+                required
+              />
+              <label for="contact-email" class="floating-label">E-mail</label>
+            </div>
+            <div class="floating-group">
+              <textarea
+                id="contact-message"
+                class="floating-input"
+                placeholder=" "
+                required
+                style="min-height: 120px; resize: vertical; padding-top: 1.5rem"
+              ></textarea>
+              <label for="contact-message" class="floating-label"
+                >Mensagem</label
+              >
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              Enviar Mensagem
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery Modal (NOVO) -->
+    <div class="modal-backdrop" id="delivery-modal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Áreas de Entrega</h3>
+          <button class="icon-btn close-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- 1. Cabeçalho Visual -->
+          <div style="text-align: center; margin-bottom: 2rem">
+            <i
+              class="fas fa-map-marker-alt"
+              style="
+                font-size: 3rem;
+                color: var(--primary);
+                margin-bottom: 1rem;
+              "
+            ></i>
+            <p style="color: var(--text-muted)">
+              Entregamos num raio de até <strong>8km</strong> da nossa unidade
+              na Rua das Pizzas.
+            </p>
+          </div>
+
+          <!-- 2. Tabela de Taxas -->
+          <div
+            style="
+              background: var(--surface-2);
+              border-radius: var(--radius-sm);
+              overflow: hidden;
+              margin-bottom: 1.5rem;
+              border: 1px solid var(--border);
+            "
+          >
+            <table
+              style="width: 100%; border-collapse: collapse; text-align: left"
+            >
+              <thead
+                style="
+                  background: rgba(0, 0, 0, 0.05);
+                  border-bottom: 1px solid var(--border);
+                "
+              >
+                <tr>
+                  <th
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-main);
+                    "
+                  >
+                    Distância
+                  </th>
+                  <th
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-main);
+                    "
+                  >
+                    Taxa
+                  </th>
+                  <th
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-main);
+                    "
+                  >
+                    Tempo Est.
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border)">
+                  <td
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-muted);
+                    "
+                  >
+                    Até 3km
+                  </td>
+                  <td
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--success);
+                      font-weight: 700;
+                    "
+                  >
+                    Grátis
+                  </td>
+                  <td
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-muted);
+                    "
+                  >
+                    30-40 min
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border)">
+                  <td
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-muted);
+                    "
+                  >
+                    3km a 5km
+                  </td>
+                  <td
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-main);
+                    "
+                  >
+                    R$ 7,00
+                  </td>
+                  <td
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-muted);
+                    "
+                  >
+                    40-50 min
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-muted);
+                    "
+                  >
+                    5km a 8km
+                  </td>
+                  <td
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-main);
+                    "
+                  >
+                    R$ 12,00
+                  </td>
+                  <td
+                    style="
+                      padding: 1rem;
+                      font-size: 0.9rem;
+                      color: var(--text-muted);
+                    "
+                  >
+                    50-60 min
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 3. Aviso e Verificação -->
+          <p
+            style="
+              font-size: 0.85rem;
+              color: var(--text-muted);
+              text-align: center;
+              margin-bottom: 1.5rem;
+            "
+          >
+            * Para entregas fora desta área, consulte disponibilidade no iFood
+            ou Rappi.
+          </p>
+
+          <div class="floating-group">
+            <input
+              type="text"
+              id="delivery-cep"
+              class="floating-input"
+              placeholder=" "
+              maxlength="9"
+            />
+            <label for="delivery-cep" class="floating-label"
+              >Digite seu CEP</label
+            >
+          </div>
+
+          <button
+            id="check-cep-btn"
+            class="btn btn-primary"
+            style="width: 100%; margin-top: 1rem"
+          >
+            Verificar meu CEP
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Modal (NOVO) -->
+    <div class="modal-backdrop" id="faq-modal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Perguntas Frequentes</h3>
+          <button class="icon-btn close-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body" style="max-height: 70vh; overflow-y: auto">
+          <details>
+            <summary>Quais são as formas de pagamento?</summary>
+            <div class="faq-answer">
+              Aceitamos cartões de crédito e débito (Visa, Mastercard, Elo),
+              Vale Refeição (Alelo, Sodexo, VR) e PIX no ato da entrega ou
+              pagamento online.
+            </div>
+          </details>
+
+          <details>
+            <summary>Posso personalizar minha pizza?</summary>
+            <div class="faq-answer">
+              Sim! Você pode remover ingredientes de qualquer pizza. Para
+              adicionar ingredientes extras ou fazer meio a meio, por favor
+              utilize nosso telefone ou WhatsApp para um atendimento
+              personalizado.
+            </div>
+          </details>
+
+          <details>
+            <summary>Vocês têm opções sem glúten?</summary>
+            <div class="faq-answer">
+              Trabalhamos com farinha italiana tradicional que contém glúten.
+              Embora tenhamos opções de saladas e pratos sem massa, não
+              recomendamos para celíacos devido ao risco de contaminação cruzada
+              no forno.
+            </div>
+          </details>
+
+          <details>
+            <summary>Como funciona o programa de fidelidade?</summary>
+            <div class="faq-answer">
+              É automático! A cada pedido realizado pelo site, você acumula
+              pontos atrelados ao seu CPF/Telefone. A cada 10 pizzas, você ganha
+              uma tradicional grátis.
+            </div>
+          </details>
+
+          <details>
+            <summary>A pizzaria abre em feriados?</summary>
+            <div class="faq-answer">
+              Sim, funcionamos normalmente em todos os feriados, das 18h às
+              23h30. Apenas no Natal (25/12) e Ano Novo (01/01) trabalhamos com
+              horário reduzido.
+            </div>
+          </details>
+
+          <div
+            style="
+              margin-top: 2rem;
+              text-align: center;
+              padding: 1.5rem;
+              background: var(--surface-2);
+              border-radius: var(--radius-sm);
+            "
+          >
+            <p style="font-size: 0.9rem; margin-bottom: 1rem">
+              Ainda com dúvidas?
+            </p>
+
+            <!-- BOTÃO ATUALIZADO: Redireciona para WhatsApp -->
+            <button
+              class="btn btn-outline"
+              style="width: 100%; gap: 0.5rem"
+              onclick="window.open('https://wa.me/5511999999999?text=Ol%C3%A1%2C%20estou%20no%20site%20e%20gostaria%20de%20falar%20com%20um%20atendente.', '_blank');"
+            >
+              <i class="fab fa-whatsapp" style="font-size: 1.1rem"></i> Falar
+              com Atendente
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="toast-container"></div>
 
@@ -1580,6 +2214,7 @@
           this.setupScrollSpy();
           this.checkStatus();
           this.initNewsletterAnimation();
+          this.setupFAQAccordion(); // NOVA CHAMADA
 
           store.subscribe((state) => {
             this.renderCart(state.cart);
@@ -1590,6 +2225,29 @@
           // Initial Renders
           this.renderMenu(MENU_DATA);
           store.notify(); // Trigger initial state
+        },
+
+        setupFAQAccordion() {
+          // Seleciona todos os elementos <details> dentro do modal de FAQ
+          const faqDetails = document.querySelectorAll("#faq-modal details");
+
+          faqDetails.forEach((targetDetail) => {
+            // Adiciona listener no <summary> (o título clicável)
+            targetDetail
+              .querySelector("summary")
+              .addEventListener("click", () => {
+                // Se o item está fechado e vai abrir (atributo 'open' ainda não existe ou é falso antes do toggle)
+                // Nota: O evento click ocorre antes da mudança de estado do details
+                if (!targetDetail.open) {
+                  // Fecha todos os outros
+                  faqDetails.forEach((detail) => {
+                    if (detail !== targetDetail) {
+                      detail.removeAttribute("open");
+                    }
+                  });
+                }
+              });
+          });
         },
 
         setupEventListeners() {
@@ -1655,6 +2313,183 @@
                 }
               );
             });
+
+          // LOGICA DO MODAL DE CARREIRAS
+          const careersModal = document.getElementById("careers-modal");
+          const closeCareersBtn = careersModal.querySelector(".close-modal");
+          const careersForm = document.getElementById("careers-form");
+
+          const toggleCareers = () => {
+            careersModal.classList.toggle("open");
+          };
+
+          document
+            .getElementById("link-careers")
+            .addEventListener("click", (e) => {
+              e.preventDefault();
+              toggleCareers();
+            });
+
+          closeCareersBtn.addEventListener("click", toggleCareers);
+
+          // Fechar ao clicar fora
+          careersModal.addEventListener("click", (e) => {
+            if (e.target === careersModal) toggleCareers();
+          });
+
+          careersForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const btn = careersForm.querySelector('button[type="submit"]');
+            this.simulateLoading(
+              btn,
+              "Candidatura enviada! Boa sorte 🍀",
+              () => {
+                careersForm.reset();
+                careersForm.querySelector(".file-input-wrapper p").innerText =
+                  "Clique para enviar seu CV (PDF/DOC)";
+                toggleCareers();
+              }
+            );
+          });
+
+          // LOGICA DO MODAL DE PRIVACIDADE (NOVO)
+          const privacyModal = document.getElementById("privacy-modal");
+          const closePrivacyBtn = privacyModal.querySelector(".close-modal");
+
+          const togglePrivacy = () => {
+            privacyModal.classList.toggle("open");
+          };
+
+          document
+            .getElementById("link-privacy")
+            .addEventListener("click", (e) => {
+              e.preventDefault();
+              togglePrivacy();
+            });
+
+          closePrivacyBtn.addEventListener("click", togglePrivacy);
+
+          privacyModal.addEventListener("click", (e) => {
+            if (e.target === privacyModal) togglePrivacy();
+          });
+
+          // LOGICA DO MODAL DE FALE CONOSCO (NOVO)
+          const contactModal = document.getElementById("contact-modal");
+          const closeContactBtn = contactModal.querySelector(".close-modal");
+          const contactForm = document.getElementById("contact-form");
+
+          const toggleContact = () => {
+            contactModal.classList.toggle("open");
+          };
+
+          document
+            .getElementById("link-contact")
+            .addEventListener("click", (e) => {
+              e.preventDefault();
+              toggleContact();
+            });
+
+          closeContactBtn.addEventListener("click", toggleContact);
+
+          contactModal.addEventListener("click", (e) => {
+            if (e.target === contactModal) toggleContact();
+          });
+
+          contactForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('button[type="submit"]');
+            this.simulateLoading(btn, "Mensagem enviada com sucesso!", () => {
+              contactForm.reset();
+              toggleContact();
+            });
+          });
+
+          // LOGICA DO MODAL DE ENTREGAS (NOVO)
+          const deliveryModal = document.getElementById("delivery-modal");
+          const closeDeliveryBtn = deliveryModal.querySelector(".close-modal");
+
+          const toggleDelivery = () => {
+            deliveryModal.classList.toggle("open");
+          };
+
+          document
+            .getElementById("link-delivery")
+            .addEventListener("click", (e) => {
+              e.preventDefault();
+              toggleDelivery();
+            });
+
+          closeDeliveryBtn.addEventListener("click", toggleDelivery);
+
+          deliveryModal.addEventListener("click", (e) => {
+            if (e.target === deliveryModal) toggleDelivery();
+          });
+
+          // LOGICA DE VERIFICAR CEP (NOVO)
+          const checkCepBtn = document.getElementById("check-cep-btn");
+          const cepInput = document.getElementById("delivery-cep");
+
+          // Formata CEP enquanto digita (Máscara 00000-000)
+          if (cepInput) {
+            cepInput.addEventListener("input", (e) => {
+              let value = e.target.value.replace(/\D/g, "");
+              if (value.length > 5) {
+                value = value.substring(0, 5) + "-" + value.substring(5, 8);
+              }
+              e.target.value = value;
+            });
+          }
+
+          if (checkCepBtn) {
+            checkCepBtn.addEventListener("click", () => {
+              const cep = cepInput.value.replace(/\D/g, "");
+
+              if (cep.length !== 8) {
+                this.toast(
+                  "Por favor, digite um CEP válido (8 dígitos).",
+                  "error"
+                );
+                return;
+              }
+
+              this.simulateLoading(checkCepBtn, "Verificando...", () => {
+                // Lógica Mock: CEPs começando com 01 a 08 são aceitos
+                const prefix = parseInt(cep.substring(0, 2));
+
+                if (prefix >= 1 && prefix <= 8) {
+                  this.toast(
+                    "🎉 Boa notícia! Entregamos no seu endereço.",
+                    "success"
+                  );
+                  setTimeout(() => toggleDelivery(), 1500);
+                } else {
+                  this.toast(
+                    "😔 Poxa, infelizmente ainda não entregamos nessa região.",
+                    "error"
+                  );
+                }
+              });
+            });
+          }
+
+          // LOGICA DO MODAL DE FAQ (NOVO)
+          const faqModal = document.getElementById("faq-modal");
+          const closeFaqBtn = faqModal.querySelector(".close-modal");
+
+          const toggleFaq = () => {
+            faqModal.classList.toggle("open");
+          };
+
+          document.getElementById("link-faq").addEventListener("click", (e) => {
+            e.preventDefault();
+            toggleFaq();
+          });
+
+          closeFaqBtn.addEventListener("click", toggleFaq);
+
+          faqModal.addEventListener("click", (e) => {
+            if (e.target === faqModal) toggleFaq();
+          });
 
           document
             .getElementById("btn-start-checkout")
