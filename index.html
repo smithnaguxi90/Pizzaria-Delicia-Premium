@@ -1333,9 +1333,27 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <h3>Seu Pedido</h3>
-        <button class="icon-btn" id="close-sidebar">
-          <i class="fas fa-times"></i>
-        </button>
+        <div style="display: flex; gap: 0.5rem">
+          <!-- NOVO: Botão Limpar Carrinho (Inicia oculto) -->
+          <button
+            class="icon-btn"
+            id="clear-cart-btn"
+            aria-label="Limpar Carrinho"
+            style="
+              color: var(--error);
+              border-color: var(--border);
+              opacity: 0;
+              pointer-events: none;
+              transition: all 0.3s;
+            "
+            title="Esvaziar Carrinho"
+          >
+            <i class="fas fa-trash-alt"></i>
+          </button>
+          <button class="icon-btn" id="close-sidebar">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
       </div>
 
       <div class="sidebar-content" id="cart-content">
@@ -1671,6 +1689,19 @@
                 }
               );
             });
+
+          // NOVO: Listener para botão de limpar carrinho
+          document
+            .getElementById("clear-cart-btn")
+            .addEventListener("click", () => {
+              if (
+                store.state.cart.length > 0 &&
+                confirm("Tem certeza que deseja remover todos os itens?")
+              ) {
+                store.clearCart();
+                this.toast("Carrinho esvaziado.", "success");
+              }
+            });
         },
 
         initNewsletterAnimation() {
@@ -1799,10 +1830,20 @@
           const container = document.getElementById("cart-content");
           const footer = document.getElementById("sidebar-footer");
           const badge = document.getElementById("cart-count");
+          const clearBtn = document.getElementById("clear-cart-btn"); // Elemento novo
 
           const totalQty = cart.reduce((acc, i) => acc + i.qty, 0);
           badge.innerText = totalQty;
           badge.classList.toggle("visible", totalQty > 0);
+
+          // Lógica de visibilidade do botão Limpar
+          if (cart.length > 0) {
+            clearBtn.style.opacity = "1";
+            clearBtn.style.pointerEvents = "auto";
+          } else {
+            clearBtn.style.opacity = "0";
+            clearBtn.style.pointerEvents = "none";
+          }
 
           if (cart.length === 0) {
             container.innerHTML = `<div style="text-align:center; padding: 2rem; color: var(--text-muted);">
