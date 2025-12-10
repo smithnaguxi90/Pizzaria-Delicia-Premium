@@ -95,7 +95,6 @@
         box-sizing: border-box;
       }
 
-      /* Regra global para remover sublinhados de links */
       a {
         text-decoration: none;
         color: inherit;
@@ -249,6 +248,7 @@
         color: var(--text-main);
       }
 
+      /* Navigation - Desktop */
       .nav-links {
         display: none;
         gap: 2rem;
@@ -292,6 +292,48 @@
         width: 100%;
       }
 
+      /* Mobile Menu Button */
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @media (min-width: 900px) {
+        .mobile-menu-btn {
+          display: none !important;
+        }
+      }
+
+      /* Mobile Menu Overlay */
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--surface-1);
+        z-index: 999;
+        padding: 6rem 2rem 2rem;
+        transform: translateX(-100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .mobile-menu-overlay.open {
+        transform: translateX(0);
+      }
+
+      .mobile-nav-link {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-main);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1rem;
+      }
+
       /* Status Indicator */
       .status-badge {
         display: flex;
@@ -307,7 +349,7 @@
         display: none; /* Mobile hidden primarily */
       }
 
-      @media (min-width: 600px) {
+      @media (min-width: 768px) {
         .status-badge {
           display: flex;
         }
@@ -395,7 +437,7 @@
         background: url("https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=1920&q=80")
           center/cover;
         z-index: -1;
-        transition: transform 0.5s ease-out; /* Parallax hook */
+        transition: transform 0.5s ease-out;
       }
 
       /* Dark Gradient by Default */
@@ -411,7 +453,6 @@
         );
       }
 
-      /* Light Gradient Override */
       [data-theme="light"] .hero-bg::after {
         background: linear-gradient(
           90deg,
@@ -452,7 +493,7 @@
       }
 
       .hero-title {
-        font-size: clamp(3rem, 5.5vw, 5rem);
+        font-size: clamp(2.5rem, 5.5vw, 5rem);
         margin-bottom: 1.5rem;
         background: linear-gradient(
           45deg,
@@ -502,8 +543,11 @@
 
       .menu-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 2.5rem;
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(280px, 1fr)
+        ); /* Responsive min width */
+        gap: 2rem;
       }
 
       .card {
@@ -824,7 +868,7 @@
         margin-bottom: 4rem;
         position: relative;
         overflow: hidden;
-        z-index: 1; /* Cria contexto de empilhamento */
+        z-index: 1;
       }
 
       .newsletter-box::after {
@@ -836,8 +880,8 @@
         height: 100%;
         background: url("https://www.transparenttextures.com/patterns/cubes.png");
         opacity: 0.1;
-        pointer-events: none; /* CORREÇÃO: Permite clicar através da textura */
-        z-index: -1; /* Garante que fique atrás do conteúdo */
+        pointer-events: none;
+        z-index: -1;
       }
 
       .newsletter-form {
@@ -846,7 +890,7 @@
         max-width: 500px;
         margin: 1.5rem auto 0;
         flex-wrap: wrap;
-        position: relative; /* Garante prioridade de clique */
+        position: relative;
         z-index: 2;
       }
 
@@ -856,10 +900,10 @@
         border-radius: 50px;
         border: none;
         min-width: 250px;
-        caret-color: var(--primary); /* Cursor Real com cor da marca */
+        caret-color: var(--primary);
       }
 
-      /* --- MODAL (Carreiras) --- */
+      /* --- MODAL (Carreiras & Geral) --- */
       .modal-backdrop {
         position: fixed;
         inset: 0;
@@ -889,6 +933,9 @@
         transform: scale(0.9) translateY(20px);
         transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        max-height: 90vh; /* Responsive height */
       }
 
       .modal-backdrop.open .modal-container {
@@ -902,10 +949,12 @@
         justify-content: space-between;
         align-items: center;
         background: var(--surface-2);
+        flex-shrink: 0;
       }
 
       .modal-body {
         padding: 2rem;
+        overflow-y: auto;
       }
 
       .file-input-wrapper {
@@ -923,7 +972,7 @@
         border-color: var(--primary);
       }
 
-      /* --- FAQ ACCORDION (NOVO) --- */
+      /* --- FAQ ACCORDION --- */
       details {
         background: var(--surface-2);
         border-radius: var(--radius-sm);
@@ -1024,8 +1073,28 @@
         }
       }
 
-      /* Responsive */
-      @media (max-width: 768px) {
+      /* --- RESPONSIVE ADJUSTMENTS --- */
+      @media (max-width: 900px) {
+        /* Adjust Nav for Mobile */
+        .container {
+          padding-inline: 1rem;
+        }
+        .hero-title {
+          font-size: 3rem;
+        }
+        .hero-desc {
+          font-size: 1rem;
+        }
+        .newsletter-box {
+          padding: 2rem 1rem;
+        }
+
+        .mobile-menu-btn {
+          display: flex !important;
+        }
+      }
+
+      @media (max-width: 600px) {
         .hero {
           justify-content: center;
           text-align: center;
@@ -1039,12 +1108,35 @@
         .hero-content {
           padding: 0 1rem;
         }
-        .hero-title {
-          font-size: 3rem;
+
+        /* Grid Stacking for About Section */
+        #sobre > div {
+          grid-template-columns: 1fr !important;
+          gap: 2rem !important;
         }
+        #sobre img {
+          order: -1;
+        }
+
+        /* Grid Stacking for Reservation */
+        #reservas > div {
+          grid-template-columns: 1fr !important;
+        }
+        #reservas div[style*="background: url"] {
+          height: 200px;
+          min-height: auto !important;
+          order: -1;
+        }
+
+        /* Sidebar Full Width */
         .sidebar {
           width: 100%;
           max-width: none;
+        }
+
+        /* Form Grids Stacking */
+        #reservation-form div[style*="grid-template-columns"] {
+          grid-template-columns: 1fr !important;
         }
       }
     </style>
@@ -1058,6 +1150,7 @@
           <span>Delícia</span>
         </a>
 
+        <!-- Desktop Navigation -->
         <div class="nav-links">
           <a href="#hero" class="nav-link active">Início</a>
           <a href="#menu" class="nav-link">Cardápio</a>
@@ -1079,9 +1172,52 @@
             <i class="fas fa-shopping-bag"></i>
             <span class="cart-badge" id="cart-count">0</span>
           </button>
+
+          <!-- Mobile Menu Button -->
+          <button
+            class="icon-btn mobile-menu-btn"
+            id="mobile-menu-toggle"
+            aria-label="Menu"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
         </div>
       </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+      <button
+        class="icon-btn"
+        id="close-mobile-menu"
+        style="position: absolute; top: 1.5rem; right: 1.5rem"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+      <a href="#hero" class="mobile-nav-link" onclick="toggleMobileMenu()"
+        >Início</a
+      >
+      <a href="#menu" class="mobile-nav-link" onclick="toggleMobileMenu()"
+        >Cardápio</a
+      >
+      <a href="#sobre" class="mobile-nav-link" onclick="toggleMobileMenu()"
+        >Sobre</a
+      >
+      <a href="#reservas" class="mobile-nav-link" onclick="toggleMobileMenu()"
+        >Reservas</a
+      >
+      <div
+        style="
+          margin-top: auto;
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+        "
+      >
+        <a href="#" class="icon-btn"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="icon-btn"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="hero" class="hero">
@@ -1356,7 +1492,6 @@
           <p style="opacity: 0.8">
             Receba ofertas exclusivas e convites para degustações.
           </p>
-          <!-- Form Updated: ID added for JS Animation target -->
           <form class="newsletter-form" id="newsletter-form">
             <input
               type="email"
@@ -1403,7 +1538,6 @@
             <ul>
               <li><a href="#sobre">Sobre Nós</a></li>
               <li><a href="#" id="link-careers">Carreiras</a></li>
-              <!-- ATIVAÇÃO: Adicionado ID para controle JS -->
               <li><a href="#" id="link-privacy">Política de Privacidade</a></li>
             </ul>
           </div>
@@ -1412,14 +1546,12 @@
             <ul>
               <li><a href="#" id="link-contact">Fale Conosco</a></li>
               <li><a href="#" id="link-delivery">Entregas</a></li>
-              <!-- ATIVAÇÃO: Adicionado ID para controle JS -->
               <li><a href="#" id="link-faq">FAQ</a></li>
             </ul>
           </div>
           <div>
             <h4 style="color: white; margin-bottom: 1rem">Siga-nos</h4>
             <div style="display: flex; gap: 1rem">
-              <!-- Links Sociais Atualizados -->
               <a
                 href="https://instagram.com"
                 target="_blank"
@@ -1463,7 +1595,6 @@
       <div class="sidebar-header">
         <h3>Seu Pedido</h3>
         <div style="display: flex; gap: 0.5rem">
-          <!-- NOVO: Botão Limpar Carrinho (Inicia oculto) -->
           <button
             class="icon-btn"
             id="clear-cart-btn"
@@ -1645,7 +1776,7 @@
       </div>
     </div>
 
-    <!-- Privacy Policy Modal (NOVO) -->
+    <!-- Privacy Policy Modal -->
     <div class="modal-backdrop" id="privacy-modal">
       <div class="modal-container">
         <div class="modal-header">
@@ -1677,8 +1808,7 @@
             "
           >
             Coletamos apenas as informações estritamente necessárias para o
-            processamento do seu pedido (nome, endereço e telefone) e para fins
-            de recrutamento quando voluntariamente submetidos.
+            processamento do seu pedido.
           </p>
 
           <h4 style="color: var(--text-main); margin-bottom: 0.5rem">
@@ -1693,23 +1823,7 @@
             "
           >
             Seus dados são armazenados em servidores seguros e nunca são
-            vendidos ou compartilhados com terceiros para fins de marketing.
-            Utilizamos criptografia padrão da indústria.
-          </p>
-
-          <h4 style="color: var(--text-main); margin-bottom: 0.5rem">
-            3. Cookies
-          </h4>
-          <p
-            style="
-              color: var(--text-muted);
-              margin-bottom: 2rem;
-              font-size: 0.95rem;
-              line-height: 1.6;
-            "
-          >
-            Utilizamos cookies apenas para manter a funcionalidade do carrinho
-            de compras e preferências de tema (modo escuro/claro).
+            vendidos.
           </p>
 
           <button
@@ -1723,7 +1837,7 @@
       </div>
     </div>
 
-    <!-- Contact Modal (NOVO) -->
+    <!-- Contact Modal -->
     <div class="modal-backdrop" id="contact-modal">
       <div class="modal-container">
         <div class="modal-header">
@@ -1734,7 +1848,7 @@
         </div>
         <div class="modal-body">
           <p style="color: var(--text-muted); margin-bottom: 1.5rem">
-            Dúvidas, sugestões ou elogios? Envie-nos uma mensagem diretamente.
+            Dúvidas, sugestões ou elogios? Envie-nos uma mensagem.
           </p>
           <form id="contact-form">
             <div class="floating-group">
@@ -1780,7 +1894,7 @@
       </div>
     </div>
 
-    <!-- Delivery Modal (NOVO) -->
+    <!-- Delivery Modal -->
     <div class="modal-backdrop" id="delivery-modal">
       <div class="modal-container">
         <div class="modal-header">
@@ -1790,7 +1904,6 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- 1. Cabeçalho Visual -->
           <div style="text-align: center; margin-bottom: 2rem">
             <i
               class="fas fa-map-marker-alt"
@@ -1801,12 +1914,10 @@
               "
             ></i>
             <p style="color: var(--text-muted)">
-              Entregamos num raio de até <strong>8km</strong> da nossa unidade
-              na Rua das Pizzas.
+              Entregamos num raio de até <strong>8km</strong> da nossa unidade.
             </p>
           </div>
 
-          <!-- 2. Tabela de Taxas -->
           <div
             style="
               background: var(--surface-2);
@@ -1844,15 +1955,6 @@
                   >
                     Taxa
                   </th>
-                  <th
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-main);
-                    "
-                  >
-                    Tempo Est.
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -1876,44 +1978,6 @@
                   >
                     Grátis
                   </td>
-                  <td
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-muted);
-                    "
-                  >
-                    30-40 min
-                  </td>
-                </tr>
-                <tr style="border-bottom: 1px solid var(--border)">
-                  <td
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-muted);
-                    "
-                  >
-                    3km a 5km
-                  </td>
-                  <td
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-main);
-                    "
-                  >
-                    R$ 7,00
-                  </td>
-                  <td
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-muted);
-                    "
-                  >
-                    40-50 min
-                  </td>
                 </tr>
                 <tr>
                   <td
@@ -1923,7 +1987,7 @@
                       color: var(--text-muted);
                     "
                   >
-                    5km a 8km
+                    3km a 8km
                   </td>
                   <td
                     style="
@@ -1932,34 +1996,12 @@
                       color: var(--text-main);
                     "
                   >
-                    R$ 12,00
-                  </td>
-                  <td
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-muted);
-                    "
-                  >
-                    50-60 min
+                    Consulte
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-
-          <!-- 3. Aviso e Verificação -->
-          <p
-            style="
-              font-size: 0.85rem;
-              color: var(--text-muted);
-              text-align: center;
-              margin-bottom: 1.5rem;
-            "
-          >
-            * Para entregas fora desta área, consulte disponibilidade no iFood
-            ou Rappi.
-          </p>
 
           <div class="floating-group">
             <input
@@ -1985,7 +2027,7 @@
       </div>
     </div>
 
-    <!-- FAQ Modal (NOVO) -->
+    <!-- FAQ Modal -->
     <div class="modal-backdrop" id="faq-modal">
       <div class="modal-container">
         <div class="modal-header">
@@ -1998,48 +2040,12 @@
           <details>
             <summary>Quais são as formas de pagamento?</summary>
             <div class="faq-answer">
-              Aceitamos cartões de crédito e débito (Visa, Mastercard, Elo),
-              Vale Refeição (Alelo, Sodexo, VR) e PIX no ato da entrega ou
-              pagamento online.
+              Aceitamos cartões de crédito e débito, VR e PIX.
             </div>
           </details>
-
-          <details>
-            <summary>Posso personalizar minha pizza?</summary>
-            <div class="faq-answer">
-              Sim! Você pode remover ingredientes de qualquer pizza. Para
-              adicionar ingredientes extras ou fazer meio a meio, por favor
-              utilize nosso telefone ou WhatsApp para um atendimento
-              personalizado.
-            </div>
-          </details>
-
-          <details>
-            <summary>Vocês têm opções sem glúten?</summary>
-            <div class="faq-answer">
-              Trabalhamos com farinha italiana tradicional que contém glúten.
-              Embora tenhamos opções de saladas e pratos sem massa, não
-              recomendamos para celíacos devido ao risco de contaminação cruzada
-              no forno.
-            </div>
-          </details>
-
-          <details>
-            <summary>Como funciona o programa de fidelidade?</summary>
-            <div class="faq-answer">
-              É automático! A cada pedido realizado pelo site, você acumula
-              pontos atrelados ao seu CPF/Telefone. A cada 10 pizzas, você ganha
-              uma tradicional grátis.
-            </div>
-          </details>
-
           <details>
             <summary>A pizzaria abre em feriados?</summary>
-            <div class="faq-answer">
-              Sim, funcionamos normalmente em todos os feriados, das 18h às
-              23h30. Apenas no Natal (25/12) e Ano Novo (01/01) trabalhamos com
-              horário reduzido.
-            </div>
+            <div class="faq-answer">Sim, funcionamos normalmente.</div>
           </details>
 
           <div
@@ -2054,8 +2060,6 @@
             <p style="font-size: 0.9rem; margin-bottom: 1rem">
               Ainda com dúvidas?
             </p>
-
-            <!-- BOTÃO ATUALIZADO: Redireciona para WhatsApp -->
             <button
               class="btn btn-outline"
               style="width: 100%; gap: 0.5rem"
@@ -2072,14 +2076,11 @@
     <div id="toast-container"></div>
 
     <script>
-      /**
-       * MOCK DATABASE
-       */
       const MENU_DATA = [
         {
           id: 1,
           name: "Margherita D.O.P",
-          desc: "Molho de tomate San Marzano, mozzarella di bufala, manjericão fresco e azeite extra virgem.",
+          desc: "Molho de tomate, mozzarella di bufala, manjericão.",
           price: 52.0,
           category: "classic",
           image:
@@ -2089,17 +2090,17 @@
         {
           id: 2,
           name: "Diavola",
-          desc: "Mozzarella fior di latte, salame picante italiano, cebola roxa e azeitonas pretas.",
+          desc: "Mozzarella, salame picante, cebola roxa, azeitonas.",
           price: 58.0,
           category: "classic",
           image:
             "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
-          tags: ["Picante", "Hot"],
+          tags: ["Picante"],
         },
         {
           id: 3,
           name: "Trufas Negras",
-          desc: "Creme de trufas negras, cogumelos porcini, mozzarella e lascas de parmesão.",
+          desc: "Creme de trufas, cogumelos porcini, mozzarella.",
           price: 85.0,
           category: "premium",
           image:
@@ -2109,7 +2110,7 @@
         {
           id: 4,
           name: "Caprese Gourmet",
-          desc: "Tomates confitados, pesto de manjericão genovês, burrata fresca (adicionada fria).",
+          desc: "Tomates confitados, pesto, burrata fresca.",
           price: 72.0,
           category: "premium",
           image:
@@ -2119,7 +2120,7 @@
         {
           id: 5,
           name: "Zucchini",
-          desc: "Abobrinha grelhada, queijo de cabra, alho poró e mel trufado.",
+          desc: "Abobrinha grelhada, queijo de cabra, mel trufado.",
           price: 64.0,
           category: "vegan",
           image:
@@ -2129,7 +2130,7 @@
         {
           id: 6,
           name: "Carbonara",
-          desc: "Base branca, mozzarella, pancetta crocante, gema de ovo e pimenta do reino.",
+          desc: "Base branca, mozzarella, pancetta, gema.",
           price: 68.0,
           category: "premium",
           image:
@@ -2138,9 +2139,6 @@
         },
       ];
 
-      /**
-       * STORE PATTERN (Data Layer)
-       */
       class Store {
         constructor() {
           this.state = {
@@ -2150,11 +2148,9 @@
           };
           this.listeners = [];
         }
-
         subscribe(fn) {
           this.listeners.push(fn);
         }
-
         notify() {
           this.listeners.forEach((fn) => fn(this.state));
           localStorage.setItem("delicia_cart", JSON.stringify(this.state.cart));
@@ -2164,14 +2160,12 @@
             JSON.stringify(this.state.favorites)
           );
         }
-
         addToCart(product, qty = 1) {
           const exists = this.state.cart.find((p) => p.id === product.id);
           if (exists) exists.qty += qty;
           else this.state.cart.push({ ...product, qty });
           this.notify();
         }
-
         updateCartQty(id, delta) {
           const item = this.state.cart.find((p) => p.id === id);
           if (!item) return;
@@ -2180,17 +2174,14 @@
             this.state.cart = this.state.cart.filter((p) => p.id !== id);
           this.notify();
         }
-
         clearCart() {
           this.state.cart = [];
           this.notify();
         }
-
         toggleTheme() {
           this.state.theme = this.state.theme === "light" ? "dark" : "light";
           this.notify();
         }
-
         toggleFavorite(id) {
           if (this.state.favorites.includes(id)) {
             this.state.favorites = this.state.favorites.filter(
@@ -2205,16 +2196,13 @@
 
       const store = new Store();
 
-      /**
-       * CONTROLLER & UI LOGIC
-       */
       const UI = {
         init() {
           this.setupEventListeners();
           this.setupScrollSpy();
           this.checkStatus();
           this.initNewsletterAnimation();
-          this.setupFAQAccordion(); // NOVA CHAMADA
+          this.setupFAQAccordion();
 
           store.subscribe((state) => {
             this.renderCart(state.cart);
@@ -2222,28 +2210,19 @@
             this.updateFavorites(state.favorites);
           });
 
-          // Initial Renders
           this.renderMenu(MENU_DATA);
-          store.notify(); // Trigger initial state
+          store.notify();
         },
 
         setupFAQAccordion() {
-          // Seleciona todos os elementos <details> dentro do modal de FAQ
           const faqDetails = document.querySelectorAll("#faq-modal details");
-
           faqDetails.forEach((targetDetail) => {
-            // Adiciona listener no <summary> (o título clicável)
             targetDetail
               .querySelector("summary")
               .addEventListener("click", () => {
-                // Se o item está fechado e vai abrir (atributo 'open' ainda não existe ou é falso antes do toggle)
-                // Nota: O evento click ocorre antes da mudança de estado do details
                 if (!targetDetail.open) {
-                  // Fecha todos os outros
                   faqDetails.forEach((detail) => {
-                    if (detail !== targetDetail) {
-                      detail.removeAttribute("open");
-                    }
+                    if (detail !== targetDetail) detail.removeAttribute("open");
                   });
                 }
               });
@@ -2251,12 +2230,10 @@
         },
 
         setupEventListeners() {
-          // Theme
           document
             .getElementById("theme-toggle")
             .addEventListener("click", () => store.toggleTheme());
 
-          // Cart Sidebar
           const toggleCart = () => {
             document.getElementById("sidebar").classList.toggle("open");
             document.getElementById("backdrop").classList.toggle("open");
@@ -2271,7 +2248,17 @@
             .getElementById("backdrop")
             .addEventListener("click", toggleCart);
 
-          // Filters
+          // Mobile Menu Logic
+          window.toggleMobileMenu = () => {
+            document.getElementById("mobile-menu").classList.toggle("open");
+          };
+          document
+            .getElementById("mobile-menu-toggle")
+            .addEventListener("click", window.toggleMobileMenu);
+          document
+            .getElementById("close-mobile-menu")
+            .addEventListener("click", window.toggleMobileMenu);
+
           document.getElementById("filters").addEventListener("click", (e) => {
             if (!e.target.classList.contains("filter-chip")) return;
             document
@@ -2286,7 +2273,32 @@
             this.renderMenu(filtered);
           });
 
-          // Forms
+          // Modal Toggles Helpers
+          const setupModal = (modalId, triggerId) => {
+            const modal = document.getElementById(modalId);
+            const trigger = document.getElementById(triggerId);
+            const close = modal.querySelector(".close-modal");
+            const toggle = () => modal.classList.toggle("open");
+
+            if (trigger)
+              trigger.addEventListener("click", (e) => {
+                e.preventDefault();
+                toggle();
+              });
+            if (close) close.addEventListener("click", toggle);
+            modal.addEventListener("click", (e) => {
+              if (e.target === modal) toggle();
+            });
+            return toggle;
+          };
+
+          const toggleCareers = setupModal("careers-modal", "link-careers");
+          const togglePrivacy = setupModal("privacy-modal", "link-privacy");
+          const toggleContact = setupModal("contact-modal", "link-contact");
+          const toggleDelivery = setupModal("delivery-modal", "link-delivery");
+          const toggleFaq = setupModal("faq-modal", "link-faq");
+
+          // Forms Submissions
           document
             .getElementById("reservation-form")
             .addEventListener("submit", (e) => {
@@ -2294,13 +2306,10 @@
               this.simulateLoading(
                 e.target.querySelector("button"),
                 "Mesa Confirmada! SMS enviado.",
-                () => {
-                  e.target.reset();
-                }
+                () => e.target.reset()
               );
             });
 
-          // NOVA FUNÇÃO: Newsletter Ativada com Listener
           document
             .getElementById("newsletter-form")
             .addEventListener("submit", (e) => {
@@ -2308,189 +2317,39 @@
               this.simulateLoading(
                 e.target.querySelector("button"),
                 "Inscrição realizada com sucesso!",
+                () => e.target.reset()
+              );
+            });
+
+          document
+            .getElementById("careers-form")
+            .addEventListener("submit", (e) => {
+              e.preventDefault();
+              this.simulateLoading(
+                e.target.querySelector("button"),
+                "Candidatura enviada!",
                 () => {
                   e.target.reset();
+                  toggleCareers();
                 }
               );
             });
 
-          // LOGICA DO MODAL DE CARREIRAS
-          const careersModal = document.getElementById("careers-modal");
-          const closeCareersBtn = careersModal.querySelector(".close-modal");
-          const careersForm = document.getElementById("careers-form");
-
-          const toggleCareers = () => {
-            careersModal.classList.toggle("open");
-          };
-
           document
-            .getElementById("link-careers")
-            .addEventListener("click", (e) => {
+            .getElementById("contact-form")
+            .addEventListener("submit", (e) => {
               e.preventDefault();
-              toggleCareers();
-            });
-
-          closeCareersBtn.addEventListener("click", toggleCareers);
-
-          // Fechar ao clicar fora
-          careersModal.addEventListener("click", (e) => {
-            if (e.target === careersModal) toggleCareers();
-          });
-
-          careersForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const btn = careersForm.querySelector('button[type="submit"]');
-            this.simulateLoading(
-              btn,
-              "Candidatura enviada! Boa sorte 🍀",
-              () => {
-                careersForm.reset();
-                careersForm.querySelector(".file-input-wrapper p").innerText =
-                  "Clique para enviar seu CV (PDF/DOC)";
-                toggleCareers();
-              }
-            );
-          });
-
-          // LOGICA DO MODAL DE PRIVACIDADE (NOVO)
-          const privacyModal = document.getElementById("privacy-modal");
-          const closePrivacyBtn = privacyModal.querySelector(".close-modal");
-
-          const togglePrivacy = () => {
-            privacyModal.classList.toggle("open");
-          };
-
-          document
-            .getElementById("link-privacy")
-            .addEventListener("click", (e) => {
-              e.preventDefault();
-              togglePrivacy();
-            });
-
-          closePrivacyBtn.addEventListener("click", togglePrivacy);
-
-          privacyModal.addEventListener("click", (e) => {
-            if (e.target === privacyModal) togglePrivacy();
-          });
-
-          // LOGICA DO MODAL DE FALE CONOSCO (NOVO)
-          const contactModal = document.getElementById("contact-modal");
-          const closeContactBtn = contactModal.querySelector(".close-modal");
-          const contactForm = document.getElementById("contact-form");
-
-          const toggleContact = () => {
-            contactModal.classList.toggle("open");
-          };
-
-          document
-            .getElementById("link-contact")
-            .addEventListener("click", (e) => {
-              e.preventDefault();
-              toggleContact();
-            });
-
-          closeContactBtn.addEventListener("click", toggleContact);
-
-          contactModal.addEventListener("click", (e) => {
-            if (e.target === contactModal) toggleContact();
-          });
-
-          contactForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const btn = contactForm.querySelector('button[type="submit"]');
-            this.simulateLoading(btn, "Mensagem enviada com sucesso!", () => {
-              contactForm.reset();
-              toggleContact();
-            });
-          });
-
-          // LOGICA DO MODAL DE ENTREGAS (NOVO)
-          const deliveryModal = document.getElementById("delivery-modal");
-          const closeDeliveryBtn = deliveryModal.querySelector(".close-modal");
-
-          const toggleDelivery = () => {
-            deliveryModal.classList.toggle("open");
-          };
-
-          document
-            .getElementById("link-delivery")
-            .addEventListener("click", (e) => {
-              e.preventDefault();
-              toggleDelivery();
-            });
-
-          closeDeliveryBtn.addEventListener("click", toggleDelivery);
-
-          deliveryModal.addEventListener("click", (e) => {
-            if (e.target === deliveryModal) toggleDelivery();
-          });
-
-          // LOGICA DE VERIFICAR CEP (NOVO)
-          const checkCepBtn = document.getElementById("check-cep-btn");
-          const cepInput = document.getElementById("delivery-cep");
-
-          // Formata CEP enquanto digita (Máscara 00000-000)
-          if (cepInput) {
-            cepInput.addEventListener("input", (e) => {
-              let value = e.target.value.replace(/\D/g, "");
-              if (value.length > 5) {
-                value = value.substring(0, 5) + "-" + value.substring(5, 8);
-              }
-              e.target.value = value;
-            });
-          }
-
-          if (checkCepBtn) {
-            checkCepBtn.addEventListener("click", () => {
-              const cep = cepInput.value.replace(/\D/g, "");
-
-              if (cep.length !== 8) {
-                this.toast(
-                  "Por favor, digite um CEP válido (8 dígitos).",
-                  "error"
-                );
-                return;
-              }
-
-              this.simulateLoading(checkCepBtn, "Verificando...", () => {
-                // Lógica Mock: CEPs começando com 01 a 08 são aceitos
-                const prefix = parseInt(cep.substring(0, 2));
-
-                if (prefix >= 1 && prefix <= 8) {
-                  this.toast(
-                    "🎉 Boa notícia! Entregamos no seu endereço.",
-                    "success"
-                  );
-                  setTimeout(() => toggleDelivery(), 1500);
-                } else {
-                  this.toast(
-                    "😔 Poxa, infelizmente ainda não entregamos nessa região.",
-                    "error"
-                  );
+              this.simulateLoading(
+                e.target.querySelector("button"),
+                "Mensagem enviada!",
+                () => {
+                  e.target.reset();
+                  toggleContact();
                 }
-              });
+              );
             });
-          }
 
-          // LOGICA DO MODAL DE FAQ (NOVO)
-          const faqModal = document.getElementById("faq-modal");
-          const closeFaqBtn = faqModal.querySelector(".close-modal");
-
-          const toggleFaq = () => {
-            faqModal.classList.toggle("open");
-          };
-
-          document.getElementById("link-faq").addEventListener("click", (e) => {
-            e.preventDefault();
-            toggleFaq();
-          });
-
-          closeFaqBtn.addEventListener("click", toggleFaq);
-
-          faqModal.addEventListener("click", (e) => {
-            if (e.target === faqModal) toggleFaq();
-          });
-
+          // Checkout Logic
           document
             .getElementById("btn-start-checkout")
             .addEventListener("click", () => {
@@ -2515,17 +2374,16 @@
               e.preventDefault();
               this.simulateLoading(
                 e.target.querySelector('button[type="submit"]'),
-                "Pedido Realizado com Sucesso!",
+                "Pedido Realizado!",
                 () => {
                   store.clearCart();
                   toggleCart();
                   e.target.reset();
-                  document.getElementById("btn-cancel-checkout").click(); // Reset view
+                  document.getElementById("btn-cancel-checkout").click();
                 }
               );
             });
 
-          // NOVO: Listener para botão de limpar carrinho
           document
             .getElementById("clear-cart-btn")
             .addEventListener("click", () => {
@@ -2537,6 +2395,26 @@
                 this.toast("Carrinho esvaziado.", "success");
               }
             });
+
+          // CEP Check
+          const checkCepBtn = document.getElementById("check-cep-btn");
+          const cepInput = document.getElementById("delivery-cep");
+          if (cepInput && checkCepBtn) {
+            cepInput.addEventListener("input", (e) => {
+              let value = e.target.value.replace(/\D/g, "");
+              if (value.length > 5)
+                value = value.substring(0, 5) + "-" + value.substring(5, 8);
+              e.target.value = value;
+            });
+            checkCepBtn.addEventListener("click", () => {
+              if (cepInput.value.replace(/\D/g, "").length !== 8)
+                return this.toast("CEP inválido.", "error");
+              this.simulateLoading(checkCepBtn, "Verificando...", () => {
+                this.toast("🎉 Entregamos no seu endereço!", "success");
+                setTimeout(toggleDelivery, 1500);
+              });
+            });
+          }
         },
 
         initNewsletterAnimation() {
@@ -2544,8 +2422,6 @@
           if (!input) return;
           const original = input.getAttribute("placeholder");
           let hasCursor = true;
-
-          // Piscar cursor no placeholder
           setInterval(() => {
             if (document.activeElement !== input) {
               input.setAttribute(
@@ -2553,21 +2429,16 @@
                 original + (hasCursor ? "|" : "")
               );
               hasCursor = !hasCursor;
-            } else {
-              input.setAttribute("placeholder", original);
-            }
+            } else input.setAttribute("placeholder", original);
           }, 800);
         },
 
         checkStatus() {
-          // Lógica simples: Aberto entre 18h e 23h
           const now = new Date();
           const hour = now.getHours();
           const isOpen = hour >= 18 && hour < 23;
-
           const badge = document.getElementById("status-badge");
           const text = document.getElementById("status-text");
-
           if (isOpen) {
             badge.className = "status-badge open";
             text.innerText = "Aberto Agora";
@@ -2580,34 +2451,24 @@
         setupScrollSpy() {
           const sections = document.querySelectorAll("section");
           const navLinks = document.querySelectorAll(".nav-link");
-
           window.addEventListener("scroll", () => {
-            // Header style
             const nav = document.getElementById("navbar");
             if (window.scrollY > 50) nav.classList.add("scrolled");
             else nav.classList.remove("scrolled");
 
-            // Parallax
-            const scrolled = window.scrollY;
             document.getElementById("hero-bg").style.transform = `translateY(${
-              scrolled * 0.5
+              window.scrollY * 0.5
             }px)`;
 
-            // Active Link
             let current = "";
             sections.forEach((section) => {
-              const sectionTop = section.offsetTop;
-              const sectionHeight = section.clientHeight;
-              if (scrollY >= sectionTop - 150) {
+              if (scrollY >= section.offsetTop - 150)
                 current = "#" + section.id;
-              }
             });
-
             navLinks.forEach((link) => {
               link.classList.remove("active");
-              if (link.getAttribute("href") === current) {
+              if (link.getAttribute("href") === current)
                 link.classList.add("active");
-              }
             });
           });
         },
@@ -2656,8 +2517,6 @@
             `
             )
             .join("");
-
-          // Re-apply favorites state
           this.updateFavorites(store.state.favorites);
         },
 
@@ -2665,13 +2524,12 @@
           const container = document.getElementById("cart-content");
           const footer = document.getElementById("sidebar-footer");
           const badge = document.getElementById("cart-count");
-          const clearBtn = document.getElementById("clear-cart-btn"); // Elemento novo
+          const clearBtn = document.getElementById("clear-cart-btn");
 
           const totalQty = cart.reduce((acc, i) => acc + i.qty, 0);
           badge.innerText = totalQty;
           badge.classList.toggle("visible", totalQty > 0);
 
-          // Lógica de visibilidade do botão Limpar
           if (cart.length > 0) {
             clearBtn.style.opacity = "1";
             clearBtn.style.pointerEvents = "auto";
@@ -2681,10 +2539,7 @@
           }
 
           if (cart.length === 0) {
-            container.innerHTML = `<div style="text-align:center; padding: 2rem; color: var(--text-muted);">
-                    <i class="fas fa-shopping-basket" style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem;"></i>
-                    <p>Seu carrinho está vazio</p>
-                </div>`;
+            container.innerHTML = `<div style="text-align:center; padding: 2rem; color: var(--text-muted);"><i class="fas fa-shopping-basket" style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem;"></i><p>Seu carrinho está vazio</p></div>`;
             footer.style.display = "none";
           } else {
             footer.style.display = "block";
@@ -2695,11 +2550,11 @@
                         <img src="${item.image}">
                         <div style="flex:1;">
                             <h4>${item.name}</h4>
-                            <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px;">
-                                R$ ${(item.price * item.qty)
-                                  .toFixed(2)
-                                  .replace(".", ",")}
-                            </div>
+                            <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px;">R$ ${(
+                              item.price * item.qty
+                            )
+                              .toFixed(2)
+                              .replace(".", ",")}</div>
                             <div class="qty-control">
                                 <button class="qty-btn" onclick="store.updateCartQty(${
                                   item.id
@@ -2716,7 +2571,6 @@
                 `
               )
               .join("");
-
             const total = cart.reduce((acc, i) => acc + i.price * i.qty, 0);
             document.getElementById("cart-total").innerText = `R$ ${total
               .toFixed(2)
@@ -2743,19 +2597,14 @@
           });
         },
 
-        /* --- ANIMATIONS & UTILS --- */
-
         addToCartAnim(id) {
           const product = MENU_DATA.find((p) => p.id === id);
-
-          // Fly Animation Logic
           const sourceImg = document.getElementById(`img-${id}`);
           const cartIcon = document.getElementById("cart-toggle");
 
-          if (sourceImg && cartIcon) {
+          if (sourceImg && cartIcon && window.innerWidth > 768) {
             const flyImg = sourceImg.cloneNode();
             flyImg.classList.add("flying-img");
-
             const rect = sourceImg.getBoundingClientRect();
             const targetRect = cartIcon.getBoundingClientRect();
 
@@ -2765,8 +2614,6 @@
             flyImg.style.height = `${rect.height}px`;
 
             document.body.appendChild(flyImg);
-
-            // Trigger reflow
             void flyImg.offsetWidth;
 
             flyImg.style.top = `${targetRect.top + 10}px`;
@@ -2782,17 +2629,16 @@
             }, 800);
           } else {
             store.addToCart(product);
+            this.toast(`${product.name} adicionado!`);
           }
         },
 
         simulateLoading(btn, successMsg, callback) {
           const originalHTML = btn.innerHTML;
           const originalWidth = btn.offsetWidth;
-
           btn.style.width = `${originalWidth}px`;
           btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
           btn.disabled = true;
-
           setTimeout(() => {
             btn.innerHTML = '<i class="fas fa-check"></i>';
             this.toast(successMsg, "success");
@@ -2802,7 +2648,7 @@
               btn.disabled = false;
               btn.style.width = "";
             }, 1000);
-          }, 2000);
+          }, 1500);
         },
 
         toast(msg, type = "success") {
