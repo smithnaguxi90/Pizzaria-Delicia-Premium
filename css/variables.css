@@ -1,0 +1,54 @@
+/* --- SYSTEM DESIGN & VARIABLES --- */
+:root {
+  /* Palette - Rustic Artisan / Italian Heritage */
+  --primary: #d9381e; /* Tomate Rústico */
+  --primary-hover: #b82a14;
+  --secondary: #2c422f; /* Verde Manjericão */
+  --accent: #d49a37; /* Dourado da Massa Assada */
+
+  /* Dark Theme Colors (Warm Dark Wood/Charcoal) */
+  --surface-1: #1c1a19; /* Madeira Escura Quente */
+  --surface-2: #262422; /* Elevação Sutil */
+  --surface-3: #363330;
+  --text-main: #fcf9f2; /* Creme Suave */
+  --text-muted: #a8a39a; /* Cinza quente */
+  --border: #3d3936;
+  --glass: rgba(28, 26, 25, 0.75);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 24px -6px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 24px 48px -12px rgba(0, 0, 0, 0.8);
+  --icon-invert: 1; /* Ícones brancos por padrão */
+
+  --success: #3a7d44;
+  --error: #d9381e;
+
+  /* Spacing & Layout */
+  --container-width: 1240px;
+  --header-height: 80px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 50px; /* Botões arredondados e amigáveis */
+
+  /* Effects */
+  --backdrop: saturate(150%) blur(16px);
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Light Theme Overrides (Warm Dough/Flour) */
+[data-theme="light"] {
+  --accent: #b57a22; /* Dourado mais escuro para contraste */
+  --surface-1: #fdfbf7; /* Branco Farinha */
+  --surface-2: #f4efe6; /* Massa de Pizza / Creme */
+  --surface-3: #e8dfd1;
+  --text-main: #2b2826; /* Marrom Escuro (Quase Preto) */
+  --text-muted: #736d66;
+  --border: #dfd7cb;
+  --glass: rgba(253, 251, 247, 0.8);
+  --shadow-sm: 0 2px 8px rgba(43, 40, 38, 0.05); /* Sombras baseadas em marrom/creme */
+  --shadow-md: 0 12px 24px -6px rgba(43, 40, 38, 0.08);
+  --shadow-lg: 0 24px 48px -12px rgba(43, 40, 38, 0.12);
+  --icon-invert: 0;
+}

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,19 @@
       content="Pizzaria Delícia – Experiência gastronômica premium com ingredientes selecionados e forno a lenha."
     />
     <meta name="theme-color" content="#121212" />
+
+    <!-- Open Graph / SEO Social Sharing -->
+    <meta property="og:title" content="Pizzaria Delícia | Premium Experience" />
+    <meta
+      property="og:description"
+      content="Experiência gastronômica premium com ingredientes selecionados e forno a lenha."
+    />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=1200&q=80"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
 
     <!-- Favicon (PNG Local) -->
     <link rel="icon" href="./assets/icon-pizzaria.png" />
@@ -21,8 +34,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap"
       rel="stylesheet"
+    />
+
+    <!-- Preload LCP Image (Hero Background) -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=1920&q=80"
     />
 
     <!-- Font Awesome -->
@@ -30,6 +50,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+
+    <link rel="stylesheet" href="./css/main.css" />
 
     <style>
       /* --- SYSTEM DESIGN & VARIABLES --- */
@@ -110,7 +132,9 @@
         background-color: var(--surface-2);
         color: var(--text-main);
         line-height: 1.6;
-        transition: background-color 0.3s, color 0.3s;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
         -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
       }
@@ -560,7 +584,6 @@
         flex-direction: column;
         height: 100%;
         position: relative;
-        group: hover;
       }
 
       .card:hover {
@@ -1142,6 +1165,11 @@
     </style>
   </head>
   <body>
+    <!-- Global Loader -->
+    <div id="global-loader" class="global-loader">
+      <div class="loader-spinner"></div>
+    </div>
+
     <!-- Header -->
     <nav class="navbar" id="navbar">
       <div class="container navbar-inner">
@@ -1168,7 +1196,12 @@
             <i class="fas fa-moon"></i>
           </button>
 
-          <button class="icon-btn" id="cart-toggle" aria-label="Abrir Carrinho">
+          <button
+            class="icon-btn"
+            id="cart-toggle"
+            aria-label="Abrir Carrinho"
+            aria-expanded="false"
+          >
             <i class="fas fa-shopping-bag"></i>
             <span class="cart-badge" id="cart-count">0</span>
           </button>
@@ -1178,6 +1211,7 @@
             class="icon-btn mobile-menu-btn"
             id="mobile-menu-toggle"
             aria-label="Menu"
+            aria-expanded="false"
           >
             <i class="fas fa-bars"></i>
           </button>
@@ -1194,18 +1228,10 @@
       >
         <i class="fas fa-times"></i>
       </button>
-      <a href="#hero" class="mobile-nav-link" onclick="toggleMobileMenu()"
-        >Início</a
-      >
-      <a href="#menu" class="mobile-nav-link" onclick="toggleMobileMenu()"
-        >Cardápio</a
-      >
-      <a href="#sobre" class="mobile-nav-link" onclick="toggleMobileMenu()"
-        >Sobre</a
-      >
-      <a href="#reservas" class="mobile-nav-link" onclick="toggleMobileMenu()"
-        >Reservas</a
-      >
+      <a href="#hero" class="mobile-nav-link">Início</a>
+      <a href="#menu" class="mobile-nav-link">Cardápio</a>
+      <a href="#sobre" class="mobile-nav-link">Sobre</a>
+      <a href="#reservas" class="mobile-nav-link">Reservas</a>
       <div
         style="
           margin-top: auto;
@@ -1269,127 +1295,57 @@
     </section>
 
     <!-- About Section -->
-    <section id="sobre" class="container" style="padding-top: 8rem">
-      <div
-        style="
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 4rem;
-          align-items: center;
-        "
-      >
+    <section id="sobre" class="container section-padding">
+      <div class="about-grid">
         <div>
-          <span class="badge-capsule" style="margin-bottom: 1rem"
-            >Nossa História</span
-          >
-          <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem">
-            Tradição & Paixão desde 2010
-          </h2>
-          <p style="color: var(--text-muted); margin-bottom: 1.5rem">
+          <span class="badge-capsule mb-1">Nossa História</span>
+          <h2 class="section-title-lg">Tradição & Paixão desde 2010</h2>
+          <p class="section-subtitle">
             A Pizzaria Delícia nasceu do sonho de trazer a autêntica experiência
             napolitana para São Paulo. Cada disco é aberto à mão e assado a
             480°C.
           </p>
-          <div
-            style="
-              display: flex;
-              gap: 3rem;
-              border-top: 1px solid var(--border);
-              padding-top: 2rem;
-            "
-          >
+          <div class="about-stats">
             <div>
-              <h4 style="font-size: 2.5rem; color: var(--primary)">15+</h4>
-              <span
-                style="
-                  font-size: 0.9rem;
-                  color: var(--text-muted);
-                  font-weight: 700;
-                  text-transform: uppercase;
-                "
-                >Anos</span
-              >
+              <h4 class="stat-number">15+</h4>
+              <span class="stat-label">Anos</span>
             </div>
             <div>
-              <h4 style="font-size: 2.5rem; color: var(--primary)">50k</h4>
-              <span
-                style="
-                  font-size: 0.9rem;
-                  color: var(--text-muted);
-                  font-weight: 700;
-                  text-transform: uppercase;
-                "
-                >Entregas</span
-              >
+              <h4 class="stat-number">50k</h4>
+              <span class="stat-label">Entregas</span>
             </div>
             <div>
-              <h4 style="font-size: 2.5rem; color: var(--primary)">4.9</h4>
-              <span
-                style="
-                  font-size: 0.9rem;
-                  color: var(--text-muted);
-                  font-weight: 700;
-                  text-transform: uppercase;
-                "
-                >Estrelas</span
-              >
+              <h4 class="stat-number">4.9</h4>
+              <span class="stat-label">Estrelas</span>
             </div>
           </div>
         </div>
-        <div style="position: relative">
-          <div
-            style="
-              position: absolute;
-              top: -20px;
-              left: -20px;
-              width: 100px;
-              height: 100px;
-              background: var(--accent);
-              border-radius: 50%;
-              z-index: -1;
-              opacity: 0.2;
-            "
-          ></div>
+        <div class="about-image-wrapper">
+          <div class="about-shape"></div>
           <img
             src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=800&q=80"
             alt="Chef pizzaiolo"
-            style="
-              border-radius: var(--radius-lg);
-              box-shadow: var(--shadow-lg);
-              width: 100%;
-            "
+            class="about-img"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
     </section>
 
     <!-- Reservation Section -->
-    <section
-      id="reservas"
-      class="container"
-      style="margin-top: 8rem; margin-bottom: 5rem"
-    >
-      <div
-        style="
-          background: var(--surface-1);
-          border-radius: var(--radius-lg);
-          overflow: hidden;
-          box-shadow: var(--shadow-lg);
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          border: 1px solid var(--border);
-        "
-      >
-        <div style="padding: 3rem">
-          <div style="margin-bottom: 2rem">
+    <section id="reservas" class="container reservation-section">
+      <div class="reservation-card">
+        <div class="reservation-content">
+          <div class="mb-2">
             <h2>Reserve sua Mesa</h2>
-            <p style="color: var(--text-muted)">
+            <p class="text-muted">
               Garanta seu lugar para uma noite inesquecível.
             </p>
           </div>
 
           <form id="reservation-form">
-            <div style="display: grid; gap: 1rem">
+            <div class="form-grid">
               <div class="floating-group">
                 <input
                   type="text"
@@ -1412,9 +1368,7 @@
                 />
                 <label for="res-phone" class="floating-label">Telefone</label>
               </div>
-              <div
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem"
-              >
+              <div class="form-row-2">
                 <div class="floating-group">
                   <input
                     type="date"
@@ -1424,11 +1378,7 @@
                   />
                 </div>
                 <div class="floating-group">
-                  <select
-                    id="res-people"
-                    class="floating-input"
-                    style="padding-top: 1.2rem"
-                  >
+                  <select id="res-people" class="floating-input select-padding">
                     <option value="2">2 Pessoas</option>
                     <option value="3">3 Pessoas</option>
                     <option value="4">4 Pessoas</option>
@@ -1437,42 +1387,17 @@
                   </select>
                 </div>
               </div>
-              <button
-                type="submit"
-                class="btn btn-primary"
-                style="margin-top: 1rem; width: 100%"
-              >
+              <button type="submit" class="btn btn-primary mt-1 w-100">
                 Confirmar Reserva
               </button>
             </div>
           </form>
         </div>
-        <div
-          style="
-            background: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80')
-              center/cover;
-            min-height: 400px;
-            position: relative;
-          "
-        >
-          <div
-            style="
-              position: absolute;
-              inset: 0;
-              background: linear-gradient(
-                to bottom,
-                transparent,
-                rgba(0, 0, 0, 0.7)
-              );
-            "
-          ></div>
-          <div
-            style="position: absolute; bottom: 2rem; left: 2rem; color: white"
-          >
-            <p style="font-weight: 700; font-size: 1.2rem">
-              "Ambiente acolhedor e familiar"
-            </p>
-            <div style="color: var(--accent)">
+        <div class="reservation-image">
+          <div class="reservation-overlay"></div>
+          <div class="reservation-quote">
+            <p class="quote-text">"Ambiente acolhedor e familiar"</p>
+            <div class="quote-stars">
               <i class="fas fa-star"></i><i class="fas fa-star"></i
               ><i class="fas fa-star"></i><i class="fas fa-star"></i
               ><i class="fas fa-star"></i>
@@ -1486,10 +1411,8 @@
     <footer>
       <div class="container">
         <div class="newsletter-box">
-          <h3 style="color: white; font-size: 2rem; margin-bottom: 0.5rem">
-            Cadastre-se na nossa Newsletter
-          </h3>
-          <p style="opacity: 0.8">
+          <h3 class="newsletter-title">Cadastre-se na nossa Newsletter</h3>
+          <p class="newsletter-subtitle">
             Receba ofertas exclusivas e convites para degustações.
           </p>
           <form class="newsletter-form" id="newsletter-form">
@@ -1500,41 +1423,25 @@
               placeholder="Seu melhor e-mail"
               required
             />
-            <button
-              type="submit"
-              class="btn btn-primary"
-              style="background: #fff; color: var(--primary)"
-            >
+            <button type="submit" class="btn btn-primary btn-newsletter">
               Inscrever-se
             </button>
           </form>
         </div>
 
-        <div
-          style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            border-top: 1px solid #333;
-            padding-top: 3rem;
-          "
-        >
+        <div class="footer-grid">
           <div>
-            <a
-              href="#"
-              class="logo"
-              style="margin-bottom: 1rem; display: inline-block"
-            >
+            <a href="#" class="logo footer-logo-link">
               <i class="fas fa-fire-alt"></i>
-              <span style="color: white">Delícia</span>
+              <span class="text-white">Delícia</span>
             </a>
-            <p style="color: #888; font-size: 0.9rem">
+            <p class="footer-info">
               CNPJ: 00.000.000/0001-00<br />
               Rua das Pizzas, 123 - SP
             </p>
           </div>
           <div class="footer-links">
-            <h4 style="color: white; margin-bottom: 1rem">Institucional</h4>
+            <h4 class="footer-heading">Institucional</h4>
             <ul>
               <li><a href="#sobre">Sobre Nós</a></li>
               <li><a href="#" id="link-careers">Carreiras</a></li>
@@ -1542,7 +1449,7 @@
             </ul>
           </div>
           <div class="footer-links">
-            <h4 style="color: white; margin-bottom: 1rem">Ajuda</h4>
+            <h4 class="footer-heading">Ajuda</h4>
             <ul>
               <li><a href="#" id="link-contact">Fale Conosco</a></li>
               <li><a href="#" id="link-delivery">Entregas</a></li>
@@ -1550,14 +1457,13 @@
             </ul>
           </div>
           <div>
-            <h4 style="color: white; margin-bottom: 1rem">Siga-nos</h4>
-            <div style="display: flex; gap: 1rem">
+            <h4 class="footer-heading">Siga-nos</h4>
+            <div class="social-links">
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="icon-btn"
-                style="border-color: #444; color: white"
+                class="icon-btn social-btn"
               >
                 <i class="fab fa-instagram"></i>
               </a>
@@ -1565,24 +1471,15 @@
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="icon-btn"
-                style="border-color: #444; color: white"
+                class="icon-btn social-btn"
               >
                 <i class="fab fa-facebook-f"></i>
               </a>
             </div>
           </div>
         </div>
-        <div
-          style="
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #222;
-            color: #555;
-            font-size: 0.85rem;
-          "
-        >
+
+        <div class="footer-bottom">
           &copy; 2025 Pizzaria Delícia. Todos os direitos reservados.<br />
           Desenvolvido por <strong>Jefferson de Araújo Silva</strong>
         </div>
@@ -1594,18 +1491,11 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <h3>Seu Pedido</h3>
-        <div style="display: flex; gap: 0.5rem">
+        <div class="sidebar-header-actions">
           <button
-            class="icon-btn"
+            class="icon-btn btn-clear-cart"
             id="clear-cart-btn"
             aria-label="Limpar Carrinho"
-            style="
-              color: var(--error);
-              border-color: var(--border);
-              opacity: 0;
-              pointer-events: none;
-              transition: all 0.3s;
-            "
             title="Esvaziar Carrinho"
           >
             <i class="fas fa-trash-alt"></i>
@@ -1621,32 +1511,16 @@
       </div>
 
       <div class="sidebar-footer" id="sidebar-footer">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-          "
-        >
+        <div class="cart-total-row">
           <span>Total</span>
           <span id="cart-total">R$ 0,00</span>
         </div>
 
-        <button
-          class="btn btn-primary"
-          style="width: 100%"
-          id="btn-start-checkout"
-        >
+        <button class="btn btn-primary w-100" id="btn-start-checkout">
           Ir para Pagamento
         </button>
 
-        <form
-          class="checkout-form"
-          id="checkout-form"
-          style="display: none; margin-top: 1.5rem"
-        >
+        <form class="checkout-form d-none" id="checkout-form">
           <div class="floating-group">
             <input
               type="text"
@@ -1678,22 +1552,102 @@
             <label for="check-phone" class="floating-label">Telefone</label>
           </div>
 
-          <div style="display: flex; gap: 0.5rem; margin-top: 1rem">
+          <div class="floating-group">
+            <select id="check-payment" class="floating-input select-padding" required>
+              <option value="PIX">PIX</option>
+              <option value="Cartão de Crédito">Cartão de Crédito (Maquininha)</option>
+              <option value="Cartão de Débito">Cartão de Débito (Maquininha)</option>
+              <option value="Dinheiro">Dinheiro</option>
+            </select>
+            <label for="check-payment" class="floating-label">Forma de Pagamento</label>
+          </div>
+
+          <div class="floating-group d-none" id="change-wrapper">
+            <input
+              type="text"
+              id="check-change"
+              class="floating-input"
+              placeholder=" "
+            />
+            <label for="check-change" class="floating-label">Troco para quanto?</label>
+          </div>
+
+          <div class="checkout-actions">
             <button
               type="button"
-              class="btn btn-outline"
-              style="flex: 1"
+              class="btn btn-outline flex-1"
               id="btn-cancel-checkout"
             >
               Voltar
             </button>
-            <button type="submit" class="btn btn-primary" style="flex: 1">
+            <button type="submit" class="btn btn-primary flex-1">
               <i class="fas fa-check"></i> Finalizar
             </button>
           </div>
         </form>
       </div>
     </aside>
+
+    <!-- Customize Pizza Modal -->
+    <div class="modal-backdrop" id="customize-modal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Personalizar Pizza</h3>
+          <button class="icon-btn close-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body modal-body-scroll">
+          <div class="customize-header">
+            <img id="customize-img" src="" alt="Pizza" class="customize-img" />
+            <div>
+              <h4 id="customize-name" class="modal-heading">Nome da Pizza</h4>
+              <p id="customize-base-price" class="text-muted" style="font-size: 0.9rem;">A partir de R$ 0,00</p>
+            </div>
+          </div>
+
+          <form id="customize-form">
+            <h4 class="modal-heading" style="font-size: 1rem;">Tamanho</h4>
+            <div class="size-selector">
+              <label class="size-option">
+                <input type="radio" name="size" value="P" />
+                <span class="size-card">
+                  <span class="size-title">Pequena</span>
+                  <span class="size-desc">-20% do valor</span>
+                </span>
+              </label>
+              <label class="size-option">
+                <input type="radio" name="size" value="M" checked />
+                <span class="size-card">
+                  <span class="size-title">Média</span>
+                  <span class="size-desc">Padrão</span>
+                </span>
+              </label>
+              <label class="size-option">
+                <input type="radio" name="size" value="G" />
+                <span class="size-card">
+                  <span class="size-title">Grande</span>
+                  <span class="size-desc">+20% do valor</span>
+                </span>
+              </label>
+            </div>
+
+            <h4 class="modal-heading" style="font-size: 1rem;">Borda</h4>
+            <div class="floating-group" style="margin-bottom: 1.5rem;">
+              <select id="customize-crust" name="crust" class="floating-input select-padding">
+                <option value="Tradicional">Tradicional (Grátis)</option>
+                <option value="Catupiry">Recheada com Catupiry (+ R$ 10,00)</option>
+                <option value="Cheddar">Recheada com Cheddar (+ R$ 10,00)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              Adicionar <span id="customize-final-price" style="margin-left: 0.5rem;">- R$ 0,00</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <!-- Careers Modal -->
     <div class="modal-backdrop" id="careers-modal">
@@ -1705,7 +1659,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <p style="color: var(--text-muted); margin-bottom: 1.5rem">
+          <p class="modal-desc">
             Junte-se à equipe da Pizzaria Delícia. Preencha o formulário e anexe
             seu currículo.
           </p>
@@ -1743,32 +1697,19 @@
               <label for="career-phone" class="floating-label">Telefone</label>
             </div>
 
-            <div
-              class="file-input-wrapper"
-              onclick="document.getElementById('career-cv').click()"
-            >
-              <i
-                class="fas fa-cloud-upload-alt"
-                style="
-                  font-size: 2rem;
-                  color: var(--primary);
-                  margin-bottom: 0.5rem;
-                "
-              ></i>
-              <p style="color: var(--text-muted); font-size: 0.9rem">
-                Clique para enviar seu CV (PDF/DOC)
-              </p>
+            <div class="file-input-wrapper" id="cv-upload-wrapper">
+              <i class="fas fa-cloud-upload-alt upload-icon"></i>
+              <p class="upload-text">Clique para enviar seu CV (PDF/DOC)</p>
               <input
                 type="file"
                 id="career-cv"
                 accept=".pdf,.doc,.docx"
                 required
-                style="display: none"
-                onchange="this.previousElementSibling.innerText = this.files[0].name"
+                class="d-none"
               />
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%">
+            <button type="submit" class="btn btn-primary w-100">
               Enviar Candidatura
             </button>
           </form>
@@ -1785,52 +1726,24 @@
             <i class="fas fa-times"></i>
           </button>
         </div>
-        <div class="modal-body" style="max-height: 60vh; overflow-y: auto">
-          <p
-            style="
-              color: var(--text-muted);
-              margin-bottom: 1.5rem;
-              font-size: 0.9rem;
-            "
-          >
+        <div class="modal-body modal-body-scroll">
+          <p class="modal-text-sm">
             Última atualização: 10 de Dezembro de 2025.
           </p>
 
-          <h4 style="color: var(--text-main); margin-bottom: 0.5rem">
-            1. Coleta de Dados
-          </h4>
-          <p
-            style="
-              color: var(--text-muted);
-              margin-bottom: 1.5rem;
-              font-size: 0.95rem;
-              line-height: 1.6;
-            "
-          >
+          <h4 class="modal-heading">1. Coleta de Dados</h4>
+          <p class="modal-text">
             Coletamos apenas as informações estritamente necessárias para o
             processamento do seu pedido.
           </p>
 
-          <h4 style="color: var(--text-main); margin-bottom: 0.5rem">
-            2. Proteção de Dados
-          </h4>
-          <p
-            style="
-              color: var(--text-muted);
-              margin-bottom: 1.5rem;
-              font-size: 0.95rem;
-              line-height: 1.6;
-            "
-          >
+          <h4 class="modal-heading">2. Proteção de Dados</h4>
+          <p class="modal-text">
             Seus dados são armazenados em servidores seguros e nunca são
             vendidos.
           </p>
 
-          <button
-            class="btn btn-primary"
-            style="width: 100%"
-            onclick="document.getElementById('privacy-modal').classList.remove('open')"
-          >
+          <button class="btn btn-primary w-100" id="btn-accept-privacy">
             Entendi e Concordo
           </button>
         </div>
@@ -1847,7 +1760,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <p style="color: var(--text-muted); margin-bottom: 1.5rem">
+          <p class="modal-desc">
             Dúvidas, sugestões ou elogios? Envie-nos uma mensagem.
           </p>
           <form id="contact-form">
@@ -1876,17 +1789,16 @@
             <div class="floating-group">
               <textarea
                 id="contact-message"
-                class="floating-input"
+                class="floating-input textarea-lg"
                 placeholder=" "
                 required
-                style="min-height: 120px; resize: vertical; padding-top: 1.5rem"
               ></textarea>
               <label for="contact-message" class="floating-label"
                 >Mensagem</label
               >
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%">
+            <button type="submit" class="btn btn-primary w-100">
               Enviar Mensagem
             </button>
           </form>
@@ -1904,100 +1816,29 @@
           </button>
         </div>
         <div class="modal-body">
-          <div style="text-align: center; margin-bottom: 2rem">
-            <i
-              class="fas fa-map-marker-alt"
-              style="
-                font-size: 3rem;
-                color: var(--primary);
-                margin-bottom: 1rem;
-              "
-            ></i>
-            <p style="color: var(--text-muted)">
+          <div class="text-center mb-2">
+            <i class="fas fa-map-marker-alt delivery-icon"></i>
+            <p class="text-muted">
               Entregamos num raio de até <strong>8km</strong> da nossa unidade.
             </p>
           </div>
 
-          <div
-            style="
-              background: var(--surface-2);
-              border-radius: var(--radius-sm);
-              overflow: hidden;
-              margin-bottom: 1.5rem;
-              border: 1px solid var(--border);
-            "
-          >
-            <table
-              style="width: 100%; border-collapse: collapse; text-align: left"
-            >
-              <thead
-                style="
-                  background: rgba(0, 0, 0, 0.05);
-                  border-bottom: 1px solid var(--border);
-                "
-              >
+          <div class="delivery-table-wrapper">
+            <table class="delivery-table">
+              <thead>
                 <tr>
-                  <th
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-main);
-                    "
-                  >
-                    Distância
-                  </th>
-                  <th
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-main);
-                    "
-                  >
-                    Taxa
-                  </th>
+                  <th>Distância</th>
+                  <th>Taxa</th>
                 </tr>
               </thead>
               <tbody>
-                <tr style="border-bottom: 1px solid var(--border)">
-                  <td
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-muted);
-                    "
-                  >
-                    Até 3km
-                  </td>
-                  <td
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--success);
-                      font-weight: 700;
-                    "
-                  >
-                    Grátis
-                  </td>
+                <tr>
+                  <td>Até 3km</td>
+                  <td class="highlight">Grátis</td>
                 </tr>
                 <tr>
-                  <td
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-muted);
-                    "
-                  >
-                    3km a 8km
-                  </td>
-                  <td
-                    style="
-                      padding: 1rem;
-                      font-size: 0.9rem;
-                      color: var(--text-main);
-                    "
-                  >
-                    Consulte
-                  </td>
+                  <td>3km a 8km</td>
+                  <td class="normal-text">Consulte</td>
                 </tr>
               </tbody>
             </table>
@@ -2016,11 +1857,7 @@
             >
           </div>
 
-          <button
-            id="check-cep-btn"
-            class="btn btn-primary"
-            style="width: 100%; margin-top: 1rem"
-          >
+          <button id="check-cep-btn" class="btn btn-primary w-100 mt-1">
             Verificar meu CEP
           </button>
         </div>
@@ -2036,7 +1873,7 @@
             <i class="fas fa-times"></i>
           </button>
         </div>
-        <div class="modal-body" style="max-height: 70vh; overflow-y: auto">
+        <div class="modal-body modal-body-scroll">
           <details>
             <summary>Quais são as formas de pagamento?</summary>
             <div class="faq-answer">
@@ -2048,628 +1885,18 @@
             <div class="faq-answer">Sim, funcionamos normalmente.</div>
           </details>
 
-          <div
-            style="
-              margin-top: 2rem;
-              text-align: center;
-              padding: 1.5rem;
-              background: var(--surface-2);
-              border-radius: var(--radius-sm);
-            "
-          >
-            <p style="font-size: 0.9rem; margin-bottom: 1rem">
-              Ainda com dúvidas?
-            </p>
-            <button
-              class="btn btn-outline"
-              style="width: 100%; gap: 0.5rem"
-              onclick="window.open('https://wa.me/5511999999999?text=Ol%C3%A1%2C%20estou%20no%20site%20e%20gostaria%20de%20falar%20com%20um%20atendente.', '_blank');"
-            >
-              <i class="fab fa-whatsapp" style="font-size: 1.1rem"></i> Falar
-              com Atendente
+          <div class="faq-contact-box">
+            <p class="faq-contact-text">Ainda com dúvidas?</p>
+            <button class="btn btn-outline w-100" id="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Falar com Atendente
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <div id="toast-container"></div>
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-    <script>
-      const MENU_DATA = [
-        {
-          id: 1,
-          name: "Margherita D.O.P",
-          desc: "Molho de tomate, mozzarella di bufala, manjericão.",
-          price: 52.0,
-          category: "classic",
-          image:
-            "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
-          tags: ["Vegetariano"],
-        },
-        {
-          id: 2,
-          name: "Diavola",
-          desc: "Mozzarella, salame picante, cebola roxa, azeitonas.",
-          price: 58.0,
-          category: "classic",
-          image:
-            "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
-          tags: ["Picante"],
-        },
-        {
-          id: 3,
-          name: "Trufas Negras",
-          desc: "Creme de trufas, cogumelos porcini, mozzarella.",
-          price: 85.0,
-          category: "premium",
-          image:
-            "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
-          tags: ["Chef's Choice"],
-        },
-        {
-          id: 4,
-          name: "Caprese Gourmet",
-          desc: "Tomates confitados, pesto, burrata fresca.",
-          price: 72.0,
-          category: "premium",
-          image:
-            "https://images.unsplash.com/photo-1593560704563-f176a2eb61db?auto=format&fit=crop&w=600&q=80",
-          tags: [],
-        },
-        {
-          id: 5,
-          name: "Zucchini",
-          desc: "Abobrinha grelhada, queijo de cabra, mel trufado.",
-          price: 64.0,
-          category: "vegan",
-          image:
-            "https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=600&q=80",
-          tags: ["Leve"],
-        },
-        {
-          id: 6,
-          name: "Carbonara",
-          desc: "Base branca, mozzarella, pancetta, gema.",
-          price: 68.0,
-          category: "premium",
-          image:
-            "https://images.unsplash.com/photo-1555072956-7758afb20e8f?auto=format&fit=crop&w=600&q=80",
-          tags: ["Novo"],
-        },
-      ];
-
-      class Store {
-        constructor() {
-          this.state = {
-            cart: JSON.parse(localStorage.getItem("delicia_cart")) || [],
-            theme: localStorage.getItem("delicia_theme") || "dark",
-            favorites: JSON.parse(localStorage.getItem("delicia_favs")) || [],
-          };
-          this.listeners = [];
-        }
-        subscribe(fn) {
-          this.listeners.push(fn);
-        }
-        notify() {
-          this.listeners.forEach((fn) => fn(this.state));
-          localStorage.setItem("delicia_cart", JSON.stringify(this.state.cart));
-          localStorage.setItem("delicia_theme", this.state.theme);
-          localStorage.setItem(
-            "delicia_favs",
-            JSON.stringify(this.state.favorites)
-          );
-        }
-        addToCart(product, qty = 1) {
-          const exists = this.state.cart.find((p) => p.id === product.id);
-          if (exists) exists.qty += qty;
-          else this.state.cart.push({ ...product, qty });
-          this.notify();
-        }
-        updateCartQty(id, delta) {
-          const item = this.state.cart.find((p) => p.id === id);
-          if (!item) return;
-          item.qty += delta;
-          if (item.qty <= 0)
-            this.state.cart = this.state.cart.filter((p) => p.id !== id);
-          this.notify();
-        }
-        clearCart() {
-          this.state.cart = [];
-          this.notify();
-        }
-        toggleTheme() {
-          this.state.theme = this.state.theme === "light" ? "dark" : "light";
-          this.notify();
-        }
-        toggleFavorite(id) {
-          if (this.state.favorites.includes(id)) {
-            this.state.favorites = this.state.favorites.filter(
-              (fid) => fid !== id
-            );
-          } else {
-            this.state.favorites.push(id);
-          }
-          this.notify();
-        }
-      }
-
-      const store = new Store();
-
-      const UI = {
-        init() {
-          this.setupEventListeners();
-          this.setupScrollSpy();
-          this.checkStatus();
-          this.initNewsletterAnimation();
-          this.setupFAQAccordion();
-
-          store.subscribe((state) => {
-            this.renderCart(state.cart);
-            this.updateTheme(state.theme);
-            this.updateFavorites(state.favorites);
-          });
-
-          this.renderMenu(MENU_DATA);
-          store.notify();
-        },
-
-        setupFAQAccordion() {
-          const faqDetails = document.querySelectorAll("#faq-modal details");
-          faqDetails.forEach((targetDetail) => {
-            targetDetail
-              .querySelector("summary")
-              .addEventListener("click", () => {
-                if (!targetDetail.open) {
-                  faqDetails.forEach((detail) => {
-                    if (detail !== targetDetail) detail.removeAttribute("open");
-                  });
-                }
-              });
-          });
-        },
-
-        setupEventListeners() {
-          document
-            .getElementById("theme-toggle")
-            .addEventListener("click", () => store.toggleTheme());
-
-          const toggleCart = () => {
-            document.getElementById("sidebar").classList.toggle("open");
-            document.getElementById("backdrop").classList.toggle("open");
-          };
-          document
-            .getElementById("cart-toggle")
-            .addEventListener("click", toggleCart);
-          document
-            .getElementById("close-sidebar")
-            .addEventListener("click", toggleCart);
-          document
-            .getElementById("backdrop")
-            .addEventListener("click", toggleCart);
-
-          // Mobile Menu Logic
-          window.toggleMobileMenu = () => {
-            document.getElementById("mobile-menu").classList.toggle("open");
-          };
-          document
-            .getElementById("mobile-menu-toggle")
-            .addEventListener("click", window.toggleMobileMenu);
-          document
-            .getElementById("close-mobile-menu")
-            .addEventListener("click", window.toggleMobileMenu);
-
-          document.getElementById("filters").addEventListener("click", (e) => {
-            if (!e.target.classList.contains("filter-chip")) return;
-            document
-              .querySelectorAll(".filter-chip")
-              .forEach((c) => c.classList.remove("active"));
-            e.target.classList.add("active");
-            const cat = e.target.dataset.filter;
-            const filtered =
-              cat === "all"
-                ? MENU_DATA
-                : MENU_DATA.filter((m) => m.category === cat);
-            this.renderMenu(filtered);
-          });
-
-          // Modal Toggles Helpers
-          const setupModal = (modalId, triggerId) => {
-            const modal = document.getElementById(modalId);
-            const trigger = document.getElementById(triggerId);
-            const close = modal.querySelector(".close-modal");
-            const toggle = () => modal.classList.toggle("open");
-
-            if (trigger)
-              trigger.addEventListener("click", (e) => {
-                e.preventDefault();
-                toggle();
-              });
-            if (close) close.addEventListener("click", toggle);
-            modal.addEventListener("click", (e) => {
-              if (e.target === modal) toggle();
-            });
-            return toggle;
-          };
-
-          const toggleCareers = setupModal("careers-modal", "link-careers");
-          const togglePrivacy = setupModal("privacy-modal", "link-privacy");
-          const toggleContact = setupModal("contact-modal", "link-contact");
-          const toggleDelivery = setupModal("delivery-modal", "link-delivery");
-          const toggleFaq = setupModal("faq-modal", "link-faq");
-
-          // Forms Submissions
-          document
-            .getElementById("reservation-form")
-            .addEventListener("submit", (e) => {
-              e.preventDefault();
-              this.simulateLoading(
-                e.target.querySelector("button"),
-                "Mesa Confirmada! SMS enviado.",
-                () => e.target.reset()
-              );
-            });
-
-          document
-            .getElementById("newsletter-form")
-            .addEventListener("submit", (e) => {
-              e.preventDefault();
-              this.simulateLoading(
-                e.target.querySelector("button"),
-                "Inscrição realizada com sucesso!",
-                () => e.target.reset()
-              );
-            });
-
-          document
-            .getElementById("careers-form")
-            .addEventListener("submit", (e) => {
-              e.preventDefault();
-              this.simulateLoading(
-                e.target.querySelector("button"),
-                "Candidatura enviada!",
-                () => {
-                  e.target.reset();
-                  toggleCareers();
-                }
-              );
-            });
-
-          document
-            .getElementById("contact-form")
-            .addEventListener("submit", (e) => {
-              e.preventDefault();
-              this.simulateLoading(
-                e.target.querySelector("button"),
-                "Mensagem enviada!",
-                () => {
-                  e.target.reset();
-                  toggleContact();
-                }
-              );
-            });
-
-          // Checkout Logic
-          document
-            .getElementById("btn-start-checkout")
-            .addEventListener("click", () => {
-              if (store.state.cart.length === 0)
-                return this.toast("Carrinho vazio!", "error");
-              document.getElementById("btn-start-checkout").style.display =
-                "none";
-              document.getElementById("checkout-form").style.display = "block";
-            });
-
-          document
-            .getElementById("btn-cancel-checkout")
-            .addEventListener("click", () => {
-              document.getElementById("btn-start-checkout").style.display =
-                "flex";
-              document.getElementById("checkout-form").style.display = "none";
-            });
-
-          document
-            .getElementById("checkout-form")
-            .addEventListener("submit", (e) => {
-              e.preventDefault();
-              this.simulateLoading(
-                e.target.querySelector('button[type="submit"]'),
-                "Pedido Realizado!",
-                () => {
-                  store.clearCart();
-                  toggleCart();
-                  e.target.reset();
-                  document.getElementById("btn-cancel-checkout").click();
-                }
-              );
-            });
-
-          document
-            .getElementById("clear-cart-btn")
-            .addEventListener("click", () => {
-              if (
-                store.state.cart.length > 0 &&
-                confirm("Tem certeza que deseja remover todos os itens?")
-              ) {
-                store.clearCart();
-                this.toast("Carrinho esvaziado.", "success");
-              }
-            });
-
-          // CEP Check
-          const checkCepBtn = document.getElementById("check-cep-btn");
-          const cepInput = document.getElementById("delivery-cep");
-          if (cepInput && checkCepBtn) {
-            cepInput.addEventListener("input", (e) => {
-              let value = e.target.value.replace(/\D/g, "");
-              if (value.length > 5)
-                value = value.substring(0, 5) + "-" + value.substring(5, 8);
-              e.target.value = value;
-            });
-            checkCepBtn.addEventListener("click", () => {
-              if (cepInput.value.replace(/\D/g, "").length !== 8)
-                return this.toast("CEP inválido.", "error");
-              this.simulateLoading(checkCepBtn, "Verificando...", () => {
-                this.toast("🎉 Entregamos no seu endereço!", "success");
-                setTimeout(toggleDelivery, 1500);
-              });
-            });
-          }
-        },
-
-        initNewsletterAnimation() {
-          const input = document.getElementById("newsletter-email");
-          if (!input) return;
-          const original = input.getAttribute("placeholder");
-          let hasCursor = true;
-          setInterval(() => {
-            if (document.activeElement !== input) {
-              input.setAttribute(
-                "placeholder",
-                original + (hasCursor ? "|" : "")
-              );
-              hasCursor = !hasCursor;
-            } else input.setAttribute("placeholder", original);
-          }, 800);
-        },
-
-        checkStatus() {
-          const now = new Date();
-          const hour = now.getHours();
-          const isOpen = hour >= 18 && hour < 23;
-          const badge = document.getElementById("status-badge");
-          const text = document.getElementById("status-text");
-          if (isOpen) {
-            badge.className = "status-badge open";
-            text.innerText = "Aberto Agora";
-          } else {
-            badge.className = "status-badge closed";
-            text.innerText = "Fechado (Abre às 18h)";
-          }
-        },
-
-        setupScrollSpy() {
-          const sections = document.querySelectorAll("section");
-          const navLinks = document.querySelectorAll(".nav-link");
-          window.addEventListener("scroll", () => {
-            const nav = document.getElementById("navbar");
-            if (window.scrollY > 50) nav.classList.add("scrolled");
-            else nav.classList.remove("scrolled");
-
-            document.getElementById("hero-bg").style.transform = `translateY(${
-              window.scrollY * 0.5
-            }px)`;
-
-            let current = "";
-            sections.forEach((section) => {
-              if (scrollY >= section.offsetTop - 150)
-                current = "#" + section.id;
-            });
-            navLinks.forEach((link) => {
-              link.classList.remove("active");
-              if (link.getAttribute("href") === current)
-                link.classList.add("active");
-            });
-          });
-        },
-
-        renderMenu(items) {
-          const grid = document.getElementById("menu-grid");
-          grid.innerHTML = items
-            .map(
-              (item) => `
-                <article class="card">
-                    <button class="fav-btn" onclick="store.toggleFavorite(${
-                      item.id
-                    })" data-id="${item.id}">
-                        <i class="fas fa-heart"></i>
-                    </button>
-                    <div class="card-image-wrapper">
-                        <img src="${item.image}" alt="${
-                item.name
-              }" class="card-img" id="img-${item.id}">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-tags">
-                            ${item.tags
-                              .map(
-                                (t) =>
-                                  `<span class="tag ${
-                                    t === "Hot" ? "hot" : ""
-                                  }">${t}</span>`
-                              )
-                              .join("")}
-                        </div>
-                        <h3 class="card-title">${item.name}</h3>
-                        <p class="card-desc">${item.desc}</p>
-                        <div class="card-footer">
-                            <span class="price">R$ ${item.price
-                              .toFixed(2)
-                              .replace(".", ",")}</span>
-                            <button class="add-btn" onclick="UI.addToCartAnim(${
-                              item.id
-                            })">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-            `
-            )
-            .join("");
-          this.updateFavorites(store.state.favorites);
-        },
-
-        renderCart(cart) {
-          const container = document.getElementById("cart-content");
-          const footer = document.getElementById("sidebar-footer");
-          const badge = document.getElementById("cart-count");
-          const clearBtn = document.getElementById("clear-cart-btn");
-
-          const totalQty = cart.reduce((acc, i) => acc + i.qty, 0);
-          badge.innerText = totalQty;
-          badge.classList.toggle("visible", totalQty > 0);
-
-          if (cart.length > 0) {
-            clearBtn.style.opacity = "1";
-            clearBtn.style.pointerEvents = "auto";
-          } else {
-            clearBtn.style.opacity = "0";
-            clearBtn.style.pointerEvents = "none";
-          }
-
-          if (cart.length === 0) {
-            container.innerHTML = `<div style="text-align:center; padding: 2rem; color: var(--text-muted);"><i class="fas fa-shopping-basket" style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem;"></i><p>Seu carrinho está vazio</p></div>`;
-            footer.style.display = "none";
-          } else {
-            footer.style.display = "block";
-            container.innerHTML = cart
-              .map(
-                (item) => `
-                    <div class="cart-item">
-                        <img src="${item.image}">
-                        <div style="flex:1;">
-                            <h4>${item.name}</h4>
-                            <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px;">R$ ${(
-                              item.price * item.qty
-                            )
-                              .toFixed(2)
-                              .replace(".", ",")}</div>
-                            <div class="qty-control">
-                                <button class="qty-btn" onclick="store.updateCartQty(${
-                                  item.id
-                                }, -1)">-</button>
-                                <span style="font-weight:600; min-width:20px; text-align:center;">${
-                                  item.qty
-                                }</span>
-                                <button class="qty-btn" onclick="store.updateCartQty(${
-                                  item.id
-                                }, 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                `
-              )
-              .join("");
-            const total = cart.reduce((acc, i) => acc + i.price * i.qty, 0);
-            document.getElementById("cart-total").innerText = `R$ ${total
-              .toFixed(2)
-              .replace(".", ",")}`;
-          }
-        },
-
-        updateTheme(theme) {
-          document.documentElement.setAttribute("data-theme", theme);
-          const icon = document.querySelector("#theme-toggle i");
-          icon.className = theme === "dark" ? "fas fa-sun" : "fas fa-moon";
-        },
-
-        updateFavorites(favs) {
-          document.querySelectorAll(".fav-btn").forEach((btn) => {
-            const id = parseInt(btn.dataset.id);
-            if (favs.includes(id)) {
-              btn.classList.add("active");
-              btn.querySelector("i").className = "fas fa-heart";
-            } else {
-              btn.classList.remove("active");
-              btn.querySelector("i").className = "far fa-heart";
-            }
-          });
-        },
-
-        addToCartAnim(id) {
-          const product = MENU_DATA.find((p) => p.id === id);
-          const sourceImg = document.getElementById(`img-${id}`);
-          const cartIcon = document.getElementById("cart-toggle");
-
-          if (sourceImg && cartIcon && window.innerWidth > 768) {
-            const flyImg = sourceImg.cloneNode();
-            flyImg.classList.add("flying-img");
-            const rect = sourceImg.getBoundingClientRect();
-            const targetRect = cartIcon.getBoundingClientRect();
-
-            flyImg.style.top = `${rect.top}px`;
-            flyImg.style.left = `${rect.left}px`;
-            flyImg.style.width = `${rect.width}px`;
-            flyImg.style.height = `${rect.height}px`;
-
-            document.body.appendChild(flyImg);
-            void flyImg.offsetWidth;
-
-            flyImg.style.top = `${targetRect.top + 10}px`;
-            flyImg.style.left = `${targetRect.left + 10}px`;
-            flyImg.style.width = "20px";
-            flyImg.style.height = "20px";
-            flyImg.style.opacity = "0";
-
-            setTimeout(() => {
-              flyImg.remove();
-              store.addToCart(product);
-              this.toast(`${product.name} adicionado!`);
-            }, 800);
-          } else {
-            store.addToCart(product);
-            this.toast(`${product.name} adicionado!`);
-          }
-        },
-
-        simulateLoading(btn, successMsg, callback) {
-          const originalHTML = btn.innerHTML;
-          const originalWidth = btn.offsetWidth;
-          btn.style.width = `${originalWidth}px`;
-          btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
-          btn.disabled = true;
-          setTimeout(() => {
-            btn.innerHTML = '<i class="fas fa-check"></i>';
-            this.toast(successMsg, "success");
-            setTimeout(() => {
-              callback();
-              btn.innerHTML = originalHTML;
-              btn.disabled = false;
-              btn.style.width = "";
-            }, 1000);
-          }, 1500);
-        },
-
-        toast(msg, type = "success") {
-          const container = document.getElementById("toast-container");
-          const el = document.createElement("div");
-          el.className = "toast";
-          el.innerHTML = `<i class="fas ${
-            type === "success" ? "fa-check-circle" : "fa-exclamation-circle"
-          }" style="color: ${
-            type === "success" ? "var(--success)" : "var(--error)"
-          }"></i> ${msg}`;
-          container.appendChild(el);
-          setTimeout(() => {
-            el.style.opacity = "0";
-            el.style.transform = "translateY(20px)";
-            setTimeout(() => el.remove(), 300);
-          }, 3000);
-        },
-      };
-
-      document.addEventListener("DOMContentLoaded", () => UI.init());
-    </script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>

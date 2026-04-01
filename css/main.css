@@ -1,0 +1,8 @@
+/* --- ARQUIVO MESTRE DE ESTILOS --- */
+/* Importa todos os módulos de forma organizada e na ordem correta da Cascata */
+
+@import url("./variables.css");
+@import url("./base.css");
+@import url("./layout.css");
+@import url("./components.css");
+@import url("./pages.css");

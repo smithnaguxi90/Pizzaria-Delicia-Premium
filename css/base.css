@@ -1,0 +1,165 @@
+/* --- RESET & BASE --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background-color: var(--surface-2);
+  color: var(--text-main);
+  line-height: 1.7; /* Mais respiro para textos longos */
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  background-image: url("https://www.transparenttextures.com/patterns/stardust.png"); /* Textura de ruído rústico (Dark Mode) */
+}
+
+[data-theme="light"] body {
+  background-image: url("https://www.transparenttextures.com/patterns/light-paper-fibers.png"); /* Textura de papel reciclado (Light Mode) */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Caveat", cursive;
+  line-height: 1.1;
+  letter-spacing: normal; /* Fontes manuscritas não devem ser espremidas */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+/* --- UTILITY CLASSES --- */
+.container {
+  width: 90%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Tracking mais luxuoso em botões */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.35);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(230, 57, 70, 0.45);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--text-main);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  background: var(--text-main);
+  color: var(--surface-1);
+}
+
+/* --- UTILITY / HELPERS --- */
+.mt-1 {
+  margin-top: 1rem;
+}
+.mb-1 {
+  margin-bottom: 1rem;
+}
+.mb-2 {
+  margin-bottom: 2rem;
+}
+.w-100 {
+  width: 100%;
+}
+.text-muted {
+  color: var(--text-muted);
+}
+.section-padding {
+  padding-block: 8rem; /* Aplica respiro igual no topo e na base (White space) */
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-success {
+  color: var(--success);
+}
+.fw-bold {
+  font-weight: 700;
+}
+.flex-1 {
+  flex: 1;
+}
+.d-none {
+  display: none !important;
+}
