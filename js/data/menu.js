@@ -86,7 +86,7 @@ export const MENU_DATA = [
     price: 74.0,
     category: "vegan",
     image:
-      "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1566843972132-def2e16ce6cc?auto=format&fit=crop&w=600&q=80",
     tags: ["Novo", "Vegano"],
   },
   {
@@ -96,7 +96,7 @@ export const MENU_DATA = [
     price: 54.0,
     category: "classic",
     image:
-      "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1599924844318-b2a65cb2dc23?auto=format&fit=crop&w=600&q=80",
     tags: ["Favorito"],
   },
 ];
