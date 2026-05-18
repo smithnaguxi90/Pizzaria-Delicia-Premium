@@ -1,0 +1,20 @@
+{
+  "name": "Pizzaria Delícia Premium",
+  "short_name": "Delícia",
+  "description": "Experiência gastronômica premium com ingredientes selecionados e forno a lenha.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1c1a19",
+  "theme_color": "#d9381e",
+  "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "categories": ["food", "shopping"],
+  "icons": [
+    {
+      "src": "./assets/icon-pizzaria.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
